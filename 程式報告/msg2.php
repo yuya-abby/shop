@@ -19,6 +19,9 @@
             font-size: 30px;
 
         }
+        header img{
+            height: 200px;
+        }
         .banner {
             background: #ffcc00;
             text-align: right;
@@ -74,37 +77,42 @@
 </head>
 <body>
 <header>噜噜咪賣貨便</header>
-<form action="" method="get">
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="留言板.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登入</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="註冊.php">註冊</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登出</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="add-user.php">註冊</a></td>
             </tr>
         </table>
         </div></div>
-<h1 align="center">新增商品</h1>
-<form action="賣家2.php" method="get">
-    <table align="center">
-        <tr>
-            <td>商品名稱：<input type="text" name="name" id=""></td>
-        </tr>
-        <tr>
-            <td>價錢：<input type="text" name="account" id=""></td>
-        </tr>
-        <tr>
-            <td>商品說明：<input type="text" name="password" id=""></td>
-        </tr>
-        <tr>
-            <td><img src="img/口紅1.jpg" alt="圖1"></td>
-        </tr>
-    </table>
-    <input type="submit" value="新增">
-</form>
+    <h3 align="center" >留言板</h3>
+    <div align="center"><input type="button" value="新增留言" onclick="location.href='msg.php'"><br><br></div>
+    <?php
+    $sql="SELECT * FROM `msg` WHERE 1";
+    $res=mysqli_query($link,$sql);
+    if(mysqli_num_rows($res)>0){
+        while($row=mysqli_fetch_assoc($res)){
+            echo "<table align='center' style='width:700px;' border='1' >";
+            echo "<tr style='height:50px;'>";
+            echo "<td>".$row['title']."</td>";
+            echo "<td>發布者:".$row['account']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<tr style='height:300px'><td colspan='2'>".'留言:'.$row["text"]."<br>".
+            "<img style='height:200px' src='".$row['img']."'>"."</td></tr>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td>發布時間:".$row['add_time']."</td>";
+            echo "<td><input type='button' style='background-color:red;' value='刪除' onclick=lcation.href='del.php?id=".$row['id']."'></td>";
+            echo "</tr>";
+            echo "</table>";
+            echo "<br>";
+        }
+    }   
+    
+    ?>
 </body>
 </html>

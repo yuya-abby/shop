@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
@@ -74,37 +73,58 @@
 </head>
 <body>
 <header>噜噜咪賣貨便</header>
-<form action="" method="get">
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="留言板.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登入</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="註冊.php">註冊</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登出</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
             </tr>
         </table>
         </div></div>
-<h1 align="center">新增商品</h1>
-<form action="賣家2.php" method="get">
-    <table align="center">
+
+
+<h1 align="center">註冊</h1>
+<form action="add-user2.php" method="post">
+<table align="center"  border="1" cellpadding="4">
+            <tr>
+                <th>欄位</th><th>資料</th>
+            </tr>
+            <tr>
+                <td>帳號:</td>
+                <td><input type="text" name="account"></td>
+                <br>
+            </tr>
+            <tr  >
+                <td>聯絡人:</td>
+                <td><input type="text" name="name"></td>.
+                <br>
+            </tr>
+            <tr>
+                <td>密碼:</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td>type:</td>
+                <td><select name="type">
+                <option value="user">u</option>
+                <option value="admin">a</option>
+                </select></td>
+                <br>
+            </tr>
         <tr>
-            <td>商品名稱：<input type="text" name="name" id=""></td>
-        </tr>
-        <tr>
-            <td>價錢：<input type="text" name="account" id=""></td>
-        </tr>
-        <tr>
-            <td>商品說明：<input type="text" name="password" id=""></td>
-        </tr>
-        <tr>
-            <td><img src="img/口紅1.jpg" alt="圖1"></td>
-        </tr>
-    </table>
-    <input type="submit" value="新增">
-</form>
+        <td>
+            <input type="submit" value="確定">
+            <input type="submit" value="返回" onclick="location.href='login.php'" >
+        </td>
+    </tr>
+    <br>
+      
+
+        </table>
+        <p style="font-size: 13px;" align="center">如果已經有帳號請按返回</p>
+    </form>
 </body>
 </html>

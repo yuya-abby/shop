@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
@@ -81,30 +80,70 @@
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="留言板.php">留言板</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登入</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="註冊.php">註冊</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登出</a></td>
             </tr>
         </table>
         </div></div>
-<h1 align="center">新增商品</h1>
-<form action="賣家2.php" method="get">
-    <table align="center">
-        <tr>
-            <td>商品名稱：<input type="text" name="name" id=""></td>
-        </tr>
-        <tr>
-            <td>價錢：<input type="text" name="account" id=""></td>
-        </tr>
-        <tr>
-            <td>商品說明：<input type="text" name="password" id=""></td>
-        </tr>
-        <tr>
-            <td><img src="img/口紅1.jpg" alt="圖1"></td>
-        </tr>
-    </table>
-    <input type="submit" value="新增">
-</form>
+        </table>
+        </div></div>
+        <h2>介紹</h2>
+        <img id="1" src="1.jpg"  style="width: 200px; height: 200px">
+        <br>
+        <br>
+        <label for="">$________________________</label>
+        <br>
+        <br>
+        <button onclick="changeImage('1.jpg')" style="width:100px; font-size:15px;">1</button>
+        <button onclick="changeImage('2.jpg')" style="width:100px; font-size:15px;">2</button>
+        <br>
+        <input type="button" value="3" style="width:100px; font-size:15px;">
+        <input type="button" value="4" style="width:100px; font-size:15px;">
+        <br>
+        <script>
+        function changeImage(imageSrc) {
+            document.getElementById('1').src = imageSrc;
+        }
+        </script>
+        <br>
+        <div class="quantity-container">
+
+        </div>
+
+        <br><br><br>
+        <table>
+            <tr>
+                <td><input type="button" value="加入購物車" style="width:120px; font-size:20px;" onclick="location.href='car.php'"></td>
+                <td><input type="button" value="直接購買" style="width:100px; font-size:20px;" onclick="location.href='check.php'"></td>
+            </tr>
+        </table>
+        <!-- <?php
+            function increaseQuantity() {
+                if(!empty($_SESSION['quantity'])){
+                    $quantity=$_SESSION['quantity'];
+                }else{
+                    $quantity = 1;
+                }
+                $quantity++;
+                $_SESSION['quantity']=$quantity;
+            }
+        ?> -->
+        <!-- <script>
+        let quantity = 1;
+
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById("quantity").innerText = quantity;
+        }
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById("quantity").innerText = quantity;
+            }
+        }
+    </script> -->
+    </form>
 </body>
 </html>

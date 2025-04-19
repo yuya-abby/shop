@@ -69,42 +69,68 @@
             padding: 15px;
             margin-top: 20px;
         }
+        .box { 
+            position: relative;
+            width: 800px;
+            height: 250px;
+            border: 1px solid #000000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .list{
+            left: 0px;
+            display:flex;
+            position: absolute;
+        }
+        .photo{
+            width: 200px;
+            height: 200px;
+            border: 3px solid red;
+            margin-left: 2px;
+            font-size: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
     </style>
 </head>
 <body>
 <header>噜噜咪賣貨便</header>
-<form action="" method="get">
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="留言板.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登入</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="註冊.php">註冊</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登出</a></td>
+                <td align="center" style="width:4%; font-size:19px;"><a href="car.php">購物車</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="add-user.php">註冊</a></td>
             </tr>
         </table>
         </div></div>
-<h1 align="center">新增商品</h1>
-<form action="賣家2.php" method="get">
-    <table align="center">
+<h3>新增留言</h3>
+    <form action="msg3.php" method="post" enctype="multipart/form-data">
+    <table border="1" style="width:500px; ">
         <tr>
-            <td>商品名稱：<input type="text" name="name" id=""></td>
+            <td style="height:50px;">標題</td>
+            <td><input type="text" name="title"></td>
+            
         </tr>
         <tr>
-            <td>價錢：<input type="text" name="account" id=""></td>
+            <td style="height:100px;">內容</td>
+            <td><input type="text" name="text"></td>
         </tr>
         <tr>
-            <td>商品說明：<input type="text" name="password" id=""></td>
+            <td>圖片</td>
+            <td><input type="file" style="height:100px;" name="img"></td>
         </tr>
         <tr>
-            <td><img src="img/口紅1.jpg" alt="圖1"></td>
+            <td><input type="submit" value="新增"></td>
+            <td><input type="reset" value="清除"></td>
         </tr>
     </table>
-    <input type="submit" value="新增">
 </form>
 </body>
 </html>
