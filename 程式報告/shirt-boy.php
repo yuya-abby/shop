@@ -73,7 +73,9 @@
     </style>
 </head>
 <body>
-<header>噜噜咪賣貨便</header>
+<header>
+<video src="img/01.mp4" autoplay muted loop style="width:20%;"></video>
+</header>
 
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
@@ -89,32 +91,56 @@
         </table>
         </div></div>
 
-    <div class="container">
-        <div class="product">
-        <img src="img/衣服男1.jpg" style="height:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>男裝1</h3>
-        </div>
+        <?php
+// 假設你已經連上資料庫 $link
 
-        <div class="product">
-        <img src="img/衣服男2.jpg" style="height:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>男裝2</h3>
-        </div>
-           
-        <div class="product">
-        <img src="img/衣服男3.jpg" style="height:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>男裝3</h3>
-        </div>
-        
-        <div class="product">
-        <img src="img/衣服男4.jpg" style="height:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>男裝4</h3>
-        </div>
-    </div>
+$sql = "SELECT id, img, money, category FROM addproduct GROUP BY category";
+$res = mysqli_query($link, $sql);
 
+if (mysqli_num_rows($res) > 0) {
+    echo "<div class='container'>";
+    while ($row = mysqli_fetch_assoc($res)) {
+        $category = $row['category'];
+        $img = $row['img'];
+        $money = $row['money'];
+
+        echo "<div class='product'>";
+        echo "<img src='".$row['c_name'].".php' onclick=\"location.href='count'\" style='height:200px; width:200px; cursor:pointer;'>";
+        echo "<p>價格：$" . htmlspecialchars($money) . "</p>";
+
+        // 購買按鈕，會把分類與價格送到 count.php
+        echo "<a href='count.php?product=" . urlencode($category) . "&price=" . urlencode($money) . "' class='button'>立即購買</a>";
+
+        echo "<h3>" . htmlspecialchars($category) . "</h3>";
+        echo "</div>";
+    }
+    echo "</div>";
+}
+?>
+<!-- <?php
+    $sql="SELECT * FROM `msg` WHERE 1";
+    $res=mysqli_query($link,$sql);
+    if(mysqli_num_rows($res)>0){
+        while($row=mysqli_fetch_assoc($res)){
+            echo "<table align='center' style='width:700px;' border='1' >";
+            echo "<tr style='height:50px;'>";
+            echo "<td>".$row['title']."</td>";
+            echo "<td>發布者:".$row['account']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<tr style='height:300px'><td colspan='2'>".'留言:'.$row["text"]."<br>".
+            "<img style='height:200px' src='".$row['img']."'>"."</td></tr>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td>發布時間:".$row['add_time']."</td>";
+            echo "<td><input type='button' style='background-color:red;' value='刪除' onclick=lcation.href='del.php?id=".$row['id']."'></td>";
+            echo "</tr>";
+            echo "</table>";
+            echo "<br>";
+        }
+    }   
+    
+    ?> -->
     
 </body>
 </html>

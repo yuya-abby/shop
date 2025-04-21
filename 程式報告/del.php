@@ -8,5 +8,5 @@ $sql="DELETE FROM `msg` WHERE `id`='$id'";
 mysqli_query($link,$sql);
 echo "<script> location.href='msg2.php'</script>;";
 
-?>
+?>            
 

@@ -90,38 +90,35 @@
             </tr>
         </table>
         </div></div>
-    <div class="container">
-        <div class="product">
-        <img src="img/衣服男1.jpg" onclick="location.href='shirt-boy.php'" 
-        style="height:200px; width:200px;">
-            <h3>男裝</h3>
-        </div>
+        <?php
+    // 假設你已經連上資料庫 $link
 
-        <div class="product">
-        <img src="img/衣服女1.jpg" onclick="location.href='shirt-girl.php'" 
-        style="height:200px; width:200px;">
-            <h3>女裝</h3>
-        </div>
+    $link_map = [
+        '男裝' => 'shirt-boy.php',
+        '女裝' => 'shirt-girl.php',
+        '手機殼' => 'phone.php',
+        '耳機殼' => 'earphone.php',
+        '口紅' => 'lipstick.php'
+    ];
 
-        <div class="product">
-        <img src="img/手機殼1.jpg" onclick="location.href='phone.php'" 
-        style="height:200px; width:200px;">
-            <h3>手機殼</h3>
-        </div>
+    $sql = "SELECT id, img, category FROM addproduct GROUP BY category"; // 只撈出每種分類一筆（避免重複）
+    $res = mysqli_query($link, $sql);
 
-        <div class="product">
-        <img src="img/耳機殼1.jpg" onclick="location.href='earphone.php'" 
-        style="height:200px; width:200px;">
-            <h3>耳機殼</h3>
-        </div>
+    if (mysqli_num_rows($res) > 0) {
+        echo "<div class='container'>";
+        while ($row = mysqli_fetch_assoc($res)) {
+            $category = $row['category'];
+            $img = $row['img'];
+            $link = isset($link_map[$category]) ? $link_map[$category] : '#';
 
-        <div class="product">
-        <img src="img/口紅1.jpg" onclick="location.href='lipstick.php'" 
-        style="height:200px; width:200px;">
-            <h3>口紅</h3>
-        </div>
-        
-    </div>
+            echo "<div class='product'>";
+            echo "<img src='".$row['img']."' onclick=\"location.href='{$link}'\" style='height:200px; width:200px;'>";
+            echo "<h3>" . htmlspecialchars($category) . "</h3>";
+            echo "</div>";
+        }
+        echo "</div>";
+    }
+?>
 
     </form>
 </body>
