@@ -94,53 +94,28 @@
         <?php
 // 假設你已經連上資料庫 $link
 
-$sql = "SELECT id, img, money, category FROM addproduct GROUP BY category";
+$sql = "SELECT `id`, `img`, `money`, `name`, `c_name` FROM `addproduct` GROUP BY c_name";
 $res = mysqli_query($link, $sql);
 
 if (mysqli_num_rows($res) > 0) {
     echo "<div class='container'>";
     while ($row = mysqli_fetch_assoc($res)) {
-        $category = $row['category'];
+        $c_name=$row['c_name'];
         $img = $row['img'];
         $money = $row['money'];
 
         echo "<div class='product'>";
-        echo "<img src='".$row['c_name'].".php' onclick=\"location.href='count'\" style='height:200px; width:200px; cursor:pointer;'>";
+        echo "<a src='".$row['c_name'].".php'><img src='".$row['img']."' onclick=\"location.href='count'\" style='height:200px; width:200px; cursor:pointer;'></img></a>";
         echo "<p>價格：$" . htmlspecialchars($money) . "</p>";
 
         // 購買按鈕，會把分類與價格送到 count.php
-        echo "<a href='count.php?product=" . urlencode($category) . "&price=" . urlencode($money) . "' class='button'>立即購買</a>";
+        echo "<a href='count.php?product=" . urlencode($c_name) . "&price=" . urlencode($money) . "' class='button'>立即購買</a>";
 
-        echo "<h3>" . htmlspecialchars($category) . "</h3>";
         echo "</div>";
     }
     echo "</div>";
 }
 ?>
-<!-- <?php
-    $sql="SELECT * FROM `msg` WHERE 1";
-    $res=mysqli_query($link,$sql);
-    if(mysqli_num_rows($res)>0){
-        while($row=mysqli_fetch_assoc($res)){
-            echo "<table align='center' style='width:700px;' border='1' >";
-            echo "<tr style='height:50px;'>";
-            echo "<td>".$row['title']."</td>";
-            echo "<td>發布者:".$row['account']."</td>";
-            echo "</tr>";
-            echo "<tr>";
-            echo "<tr style='height:300px'><td colspan='2'>".'留言:'.$row["text"]."<br>".
-            "<img style='height:200px' src='".$row['img']."'>"."</td></tr>";
-            echo "</tr>";
-            echo "<tr>";
-            echo "<td>發布時間:".$row['add_time']."</td>";
-            echo "<td><input type='button' style='background-color:red;' value='刪除' onclick=lcation.href='del.php?id=".$row['id']."'></td>";
-            echo "</tr>";
-            echo "</table>";
-            echo "<br>";
-        }
-    }   
-    
-    ?> -->
     
 </body>
 </html>
