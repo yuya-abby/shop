@@ -14,6 +14,6 @@ VALUES (null,'$account','$title','$text','$img',NOW(),null)";
 
 $res=mysqli_query($link,$sql);
 
-echo "<script> location.href='msg2.php'</script>;";
+echo "<script> location.href='msg-after2.php'</script>;";
 
 ?>

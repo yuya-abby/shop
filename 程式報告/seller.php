@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
 <?php include "db.php"; ?>
     <meta charset="UTF-8">
@@ -18,9 +18,6 @@
             text-align: center;
             font-size: 30px;
 
-        }
-        header img{
-            height: 200px;
         }
         .banner {
             background: #ffcc00;
@@ -76,53 +73,53 @@
     </style>
 </head>
 <body>
-<header>
-<video src="img/01.mp4" autoplay muted loop style="width:20%;"></video>
-</header>
+    <header>噜噜咪賣貨便</header>
+    
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:6%; font-size:20px;"><a href="admin.php">編輯權限</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
+                <td align="center" style="width:4%; font-size:20px;"><a href="add-user.php">註冊</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
-
             </tr>
         </table>
         </div></div>
-<h1 >結帳</h1>
-
-    <form action="check2.php" method="post">
-    <table align="center">
-    <tr>
-        <td></td>
-        <td><input type="text" name="img"><img style='height:200px' src=".$row['img']"></td>
-        </tr>
-        <tr>
-        <td>商品名稱：</td>
-        </tr>
-        <tr>
-            <td>寄送地址：</td>
-            <td><input type="text" name="address"><br></td>
-        </tr>
-        <tr>
-            <td>備註：</td>
-            <td><input type="text" name="remark"></td>
-        </tr>
-        <tr>
-            <td>產品數量：</td>
-        </tr>
-        <tr>
-            <td>總計金額：</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><a href="#" class="button" onclick="location.href='check.php'">確認</a></td>
-        </tr>
-    </table>
-
-</form>
+</div></div>
+    
+    <div class="container">
+        <div class="product">
+            <img src="img/口紅1.jpg" alt="圖1">
+            <h3>口紅1</h3>
+            <p>$ 299</p>
+            <a href="index.php" input type="button" value="立即購買"class="button">立即購買</a>
+          
+        </div>
+        <div class="product">
+            <img src="img/口紅2.jpg" alt="商品圖片">
+            <h3>熱銷商品 2</h3>
+            <p>$ 399</p>
+            <a href="#" class="button">立即購買</a>
+           
+        </div>
+        <div class="product">
+            <img src="img/口紅3.jpg" alt="商品圖片">
+            <h3>熱銷商品 3</h3>
+            <p>$ 499</p>
+            <a href="#" class="button">立即購買</a>
+        </div>
+        <div class="product">
+            <img src="img/口紅4.jpg" alt="商品圖片">
+            <h3>熱銷商品 3</h3>
+            <p>$ 599</p>
+            <a href="" class="button">立即購買</a>
+        </div>
+    </div>
+    
 </body>
 </html>
+
+

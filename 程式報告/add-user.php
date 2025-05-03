@@ -80,9 +80,8 @@
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="msg2.php">留言板</a></td>
             </tr>
         </table>
         </div></div>
@@ -100,7 +99,7 @@
                 <br>
             </tr>
             <tr  >
-                <td>聯絡人:</td>
+                <td>姓名:</td>
                 <td><input type="text" name="name"></td>.
                 <br>
             </tr>
@@ -109,12 +108,12 @@
                 <td><input type="password" name="password"></td>
             </tr>
             <tr>
-                <td>type:</td>
-                <td><select name="type">
-                <option value="user">u</option>
-                <option value="admin">a</option>
-                </select></td>
-                <br>
+                <td>信箱:</td>
+                <td><input type="text" name="email"></td>
+            </tr>
+            <tr>
+                <td>連絡電話:</td>
+                <td><input type="text" name="phone"></td>
             </tr>
         <tr>
         <td>

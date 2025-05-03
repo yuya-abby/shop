@@ -15,16 +15,19 @@ if(mysqli_num_rows($res)>0){
             $_SESSION['name']=$row['name'];
 
             if($row['type']=="a"){
-                header("location:index-after.php");
+                header("location:a-main.php");
+            }elseif($row['type']=="s"){
+                header("location:seller.php");
             }else{
-                header("location:login.php");
+                header("location:index-after.php");
             }
         }
     }else{
-        header("location:index.php");
+
+        header("location:login.php");
     }
 }else{
-    header("location:index.php");
+    header("location:login.php");
 }
 
 

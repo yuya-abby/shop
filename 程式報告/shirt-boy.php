@@ -82,11 +82,11 @@
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="msg2.php">留言板</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="add-user.php">註冊</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
+            
             </tr>
         </table>
         </div></div>
@@ -94,23 +94,24 @@
         <?php
 // 假設你已經連上資料庫 $link
 
-$sql = "SELECT `id`, `img`, `money`, `name`, `c_name` FROM `addproduct` GROUP BY c_name";
+$sql = "SELECT `id`, `img`, `money`, `name`, `category` FROM `addproduct` WHERE category = '男裝'";
 $res = mysqli_query($link, $sql);
 
 if (mysqli_num_rows($res) > 0) {
     echo "<div class='container'>";
     while ($row = mysqli_fetch_assoc($res)) {
-        $c_name=$row['c_name'];
+        $category=$row['category'];
+        $name=$row['name'];
         $img = $row['img'];
         $money = $row['money'];
 
         echo "<div class='product'>";
-        echo "<a src='".$row['c_name'].".php'><img src='".$row['img']."' onclick=\"location.href='count'\" style='height:200px; width:200px; cursor:pointer;'></img></a>";
+        echo "<a src='".$row['name'].".php'><img src='".$row['img']."' onclick=\"location.href='count'\" style='height:200px; width:200px; cursor:pointer;'></img></a>";
+        echo "<h3>" . htmlspecialchars($name) . "</h3>";
         echo "<p>價格：$" . htmlspecialchars($money) . "</p>";
-
         // 購買按鈕，會把分類與價格送到 count.php
-        echo "<a href='count.php?product=" . urlencode($c_name) . "&price=" . urlencode($money) . "' class='button'>立即購買</a>";
-
+        echo "<a href='login.php?product=" . urlencode($category) . "&price=" . urlencode($money) . "' class='button' type='button' color:white;' onclick=alert('請先登入')>立即購買</a>";
+        
         echo "</div>";
     }
     echo "</div>";

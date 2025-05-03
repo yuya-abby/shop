@@ -82,47 +82,44 @@
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
-                <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
+                <td style="width: 4%; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:6%; font-size:20px;"><a href="admin.php">編輯權限</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
-
             </tr>
         </table>
         </div></div>
-<h1 >結帳</h1>
-
-    <form action="check2.php" method="post">
-    <table align="center">
-    <tr>
-        <td></td>
-        <td><input type="text" name="img"><img style='height:200px' src=".$row['img']"></td>
-        </tr>
-        <tr>
-        <td>商品名稱：</td>
-        </tr>
-        <tr>
-            <td>寄送地址：</td>
-            <td><input type="text" name="address"><br></td>
-        </tr>
-        <tr>
-            <td>備註：</td>
-            <td><input type="text" name="remark"></td>
-        </tr>
-        <tr>
-            <td>產品數量：</td>
-        </tr>
-        <tr>
-            <td>總計金額：</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><a href="#" class="button" onclick="location.href='check.php'">確認</a></td>
-        </tr>
-    </table>
-
-</form>
+    <h3 align="center" >留言板</h3>
+    <div align="center"><input type="button" value="新增留言" onclick="location.href='msg-after.php'"><br><br></div>
+    <form action="msg-after3.php" method="get">
+    <?php
+    $sql="SELECT * FROM `msg` WHERE 1";
+    $res=mysqli_query($link,$sql);
+    if(mysqli_num_rows($res)>0){
+        while($row=mysqli_fetch_assoc($res)){
+            echo "<table align='center' style='width:700px;' border='1' >";
+            echo "<tr style='height:50px;'>";
+            echo "<td>".$row['title']."</td>";
+            echo "<td>發布者:".$row['account']."</td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<tr style='height:300px'><td colspan='2'>".'留言:'.$row["text"]."<br>".
+            "<img style='height:200px' src='".$row['img']."'>"."</td></tr>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td>發布時間:".$row['add_time']."</td>";
+            if($_SESSION["account"] == $row["account"]){
+                echo "<td><input type='button' style='background-color:red;' value='刪除' onclick=\"location.href='del.php?id=".$row['id']."'\"></td>";
+            } else {
+                echo "<td></td>";
+            }
+            echo "</tr>";
+            echo "</table>";
+            echo "<br>";
+        }
+    }   
+    
+    ?>
+    </form>
 </body>
 </html>

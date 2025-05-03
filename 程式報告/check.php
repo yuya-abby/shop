@@ -84,8 +84,6 @@
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="add-user.php">註冊</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>

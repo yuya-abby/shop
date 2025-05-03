@@ -19,9 +19,6 @@
             font-size: 30px;
 
         }
-        header img{
-            height: 200px;
-        }
         .banner {
             background: #ffcc00;
             text-align: right;
@@ -72,6 +69,31 @@
             padding: 15px;
             margin-top: 20px;
         }
+        .box { 
+            position: relative;
+            width: 800px;
+            height: 250px;
+            border: 1px solid #000000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .list{
+            left: 0px;
+            display:flex;
+            position: absolute;
+        }
+        .photo{
+            width: 200px;
+            height: 200px;
+            border: 3px solid red;
+            margin-left: 2px;
+            font-size: 5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         
     </style>
 </head>
@@ -82,47 +104,35 @@
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
-                <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
+                <td style="width: 4%; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:6%; font-size:20px;"><a href="admin.php">編輯權限</a></td>
+                <td align="center" style="width:4%; font-size:19px;"><a href="car.php">購物車</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
 
             </tr>
         </table>
         </div></div>
-<h1 >結帳</h1>
-
-    <form action="check2.php" method="post">
-    <table align="center">
-    <tr>
-        <td></td>
-        <td><input type="text" name="img"><img style='height:200px' src=".$row['img']"></td>
+<h3>新增留言</h3>
+    <form action="msg-after3.php" method="get" enctype="multipart/form-data">
+    <table border="1" style="width:500px; ">
+        <tr>
+            <td style="height:50px;">標題</td>
+            <td><input type="text" name="title"></td>
+            
         </tr>
         <tr>
-        <td>商品名稱：</td>
+            <td style="height:100px;">內容</td>
+            <td><input type="text" name="text"></td>
         </tr>
         <tr>
-            <td>寄送地址：</td>
-            <td><input type="text" name="address"><br></td>
+            <td>圖片</td>
+            <td><input type="file" style="height:100px;" name="img"></td>
         </tr>
         <tr>
-            <td>備註：</td>
-            <td><input type="text" name="remark"></td>
-        </tr>
-        <tr>
-            <td>產品數量：</td>
-        </tr>
-        <tr>
-            <td>總計金額：</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><a href="#" class="button" onclick="location.href='check.php'">確認</a></td>
+            <td><input type="submit" value="新增"></td>
+            <td><input type="reset" value="清除"></td>
         </tr>
     </table>
-
 </form>
 </body>
 </html>

@@ -81,41 +81,41 @@
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="msg2.php">留言板</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登入</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="add-user.php">註冊</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
+
             </tr>
         </table>
         </div></div>
 
-    <div class="container">
-        <div class="product">
-        <img src="img/口紅1.jpg" style="heigh:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>口紅1</h3>
-        </div>
+        <?php
+// 假設你已經連上資料庫 $link
 
-        <div class="product">
-        <img src="img/口紅2.jpg" style="heigh:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>口紅2</h3>
-        </div>
-           
-        <div class="product">
-        <img src="img/口紅3.jpg" style="heigh:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>口紅3</h3>
-        </div>
+$sql = "SELECT `id`, `img`, `money`, `name`, `category` FROM `addproduct` WHERE category = '口紅'";
+$res = mysqli_query($link, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+    echo "<div class='container'>";
+    while ($row = mysqli_fetch_assoc($res)) {
+        $category=$row['category'];
+        $name=$row['name'];
+        $img = $row['img'];
+        $money = $row['money'];
+
+        echo "<div class='product'>";
+        echo "<a src='".$row['name'].".php'><img src='".$row['img']."' onclick=\"location.href='count'\" style='height:200px; width:200px; cursor:pointer;'></img></a>";
+        echo "<h3>" . htmlspecialchars($name) . "</h3>";
+        echo "<p>價格：$" . htmlspecialchars($money) . "</p>";
+        // 購買按鈕，會把分類與價格送到 count.php
+        echo "<a href='login.php?product=" . urlencode($category) . "&price=" . urlencode($money) . "' class='button' type='button' color:white;' onclick=alert('請先登入')>立即購買</a>";
         
-        <div class="product">
-        <img src="img/口紅4.jpg" style="heigh:200px; width:200px;">
-        <a href="#" class="button" onclick="location.href='count.php'">立即購買</a>
-        <h3>口紅4</h3>
-        </div>
-    </div>
-
+        echo "</div>";
+    }
+    echo "</div>";
+}
+?>
     
 </body>
 </html>

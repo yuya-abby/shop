@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <?php include "db.php"; ?>
@@ -113,7 +113,7 @@
         </table>
         </div></div>
 <h3>新增留言</h3>
-    <form action="msg3.php" method="post" enctype="multipart/form-data">
+    <form action="msg3.php" method="get" enctype="multipart/form-data">
     <table border="1" style="width:500px; ">
         <tr>
             <td style="height:50px;">標題</td>
@@ -135,4 +135,4 @@
     </table>
 </form>
 </body>
-</html>
+</html> -->

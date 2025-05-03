@@ -91,7 +91,8 @@
         </table>
         </div></div>
     <h3 align="center" >留言板</h3>
-    <div align="center"><input type="button" value="新增留言" onclick="location.href='msg.php'"><br><br></div>
+    <div align="center"><input type="button" value="新增留言" onclick=alert('請先登入')><br><br></div>
+    <form action="msg3.php" method="get">
     <?php
     $sql="SELECT * FROM `msg` WHERE 1";
     $res=mysqli_query($link,$sql);
@@ -108,7 +109,11 @@
             echo "</tr>";
             echo "<tr>";
             echo "<td>發布時間:".$row['add_time']."</td>";
-            echo "<td><input type='button' style='background-color:red;' value='刪除' onclick=lcation.href='del.php?id=".$row['id']."'></td>";
+            if($_SESSION["account"] == $row["account"]){
+                echo "<td></td>";
+            } else {
+                echo "<td></td>";
+            }
             echo "</tr>";
             echo "</table>";
             echo "<br>";
@@ -116,5 +121,6 @@
     }   
     
     ?>
+    </form>
 </body>
 </html>

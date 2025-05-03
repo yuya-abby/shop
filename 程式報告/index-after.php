@@ -76,17 +76,18 @@
     </style>
 </head>
 <body>
-<header>噜噜咪賣貨便</header>
-<form action="index-new" method="post">
+<header>
+<video src="img/01.mp4" autoplay muted loop style="width:20%;"></video>
+</header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="msg2.php">留言板</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="msg-after2.php">留言板</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="add-user.php">註冊</a></td>
+                <td align="center" style="width:6%; font-size:20px;"><a href="admin.php">編輯權限</a></td>
             </tr>
         </table>
         </div></div>
@@ -94,22 +95,23 @@
     // 假設你已經連上資料庫 $link
 
     $link_map = [
-        '男裝' => 'shirt-boy.php',
-        '女裝' => 'shirt-girl.php',
-        '手機殼' => 'phone.php',
-        '耳機殼' => 'earphone.php',
-        '口紅' => 'lipstick.php'
+        'shirt-boy' => 'shirt-boy2.php',
+        'shirt-girl' => 'shirt-girl2.php',
+        'phone' => 'phone2.php',
+        'earphone' => 'earphone2.php',
+        'lipstick' => 'lipstick2.php'
     ];
 
-    $sql = "SELECT id, img, category FROM addproduct GROUP BY category"; // 只撈出每種分類一筆（避免重複）
+    $sql = "SELECT id, img, category, c_name FROM addproduct GROUP BY category"; // 只撈出每種分類一筆（避免重複）
     $res = mysqli_query($link, $sql);
 
     if (mysqli_num_rows($res) > 0) {
         echo "<div class='container'>";
         while ($row = mysqli_fetch_assoc($res)) {
-            $category = $row['category'];
+            $category=$row['category'];
+            $c_name = $row['c_name'];
             $img = $row['img'];
-            $link = isset($link_map[$category]) ? $link_map[$category] : '#';
+            $link = isset($link_map[$c_name]) ? $link_map[$c_name] : '#';
 
             echo "<div class='product'>";
             echo "<img src='".$row['img']."' onclick=\"location.href='{$link}'\" style='height:200px; width:200px;'>";
@@ -120,6 +122,5 @@
     }
 ?>
 
-    </form>
 </body>
 </html>

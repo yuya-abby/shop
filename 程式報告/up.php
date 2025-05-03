@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "db.php"; ?>
+    <?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
@@ -18,9 +18,6 @@
             text-align: center;
             font-size: 30px;
 
-        }
-        header img{
-            height: 200px;
         }
         .banner {
             background: #ffcc00;
@@ -85,44 +82,58 @@
                 <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:6%; font-size:20px;"><a href="admin.php">編輯權限</a></td>
+                <td align="center" style="width:5%; font-size:20px;"><a href="msg2.php">留言板</a></td>
                 <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
-
             </tr>
         </table>
         </div></div>
-<h1 >結帳</h1>
+    <h1 align="center">修改權限</h1>
+        <table align="center" border="1">
+            <?php
+            $id=$_POST['id'];
+            $sql="SELECT * FROM `user` WHERE `id`='$id'";
+            $res=mysqli_query($link,$sql);
+            if(mysqli_num_rows($res)>0){
+                while($row=mysqli_fetch_assoc($res)){
+                    echo "<form action='up2.php' method='post'>";
+                    echo "<tr>";
+                    echo "<td>帳號</td>";
+                    echo "<td><input type='account' name='account' value='".$row['account']."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>密碼</td>";
+                    echo "<td><input type='password' name='password' value='".$row['password']."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>姓名</td>";
+                    echo "<td><input type='name' name='name' value='".$row['name']."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>權限</td>";
+                    echo "<td><input type='type' name='type' value='".$row['type']."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td></td>";
+                    echo "<td></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td></td>";
+                    echo "<td>
+                        <input type='hidden' name='id' value='".$row['id']."'>
+                        <input type='submit' value='修改' style='background-color:red; color:white;'>
+                        </td>";
+                    echo "</tr>";
+                    
+                    echo "</form>";
 
-    <form action="check2.php" method="post">
-    <table align="center">
-    <tr>
-        <td></td>
-        <td><input type="text" name="img"><img style='height:200px' src=".$row['img']"></td>
-        </tr>
-        <tr>
-        <td>商品名稱：</td>
-        </tr>
-        <tr>
-            <td>寄送地址：</td>
-            <td><input type="text" name="address"><br></td>
-        </tr>
-        <tr>
-            <td>備註：</td>
-            <td><input type="text" name="remark"></td>
-        </tr>
-        <tr>
-            <td>產品數量：</td>
-        </tr>
-        <tr>
-            <td>總計金額：</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><a href="#" class="button" onclick="location.href='check.php'">確認</a></td>
-        </tr>
-    </table>
 
-</form>
+
+                }
+            }
+            ?>
+        </table>
+
+
+
 </body>
 </html>
