@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
     <style>
         body {
 
-            background-color:rgb(240, 234, 234); /* 這是背景 */
+        background-color:rgb(255, 255, 255); /* 這是背景 */
         }
-           
+
         header {
-            background-color: #ff6600;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 30px;
+        background-color:rgb(255, 236, 215);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 30px;
 
         }
+        header img{
+        height: 200px;
+        }
         .banner {
-            background: #ffcc00;
-            text-align: right;
-            padding: 8px;
-            font-size: 15px;
-            font-weight: bold;
+        background:rgb(255, 244, 180);
+        text-align: right;
+        padding: 8px;
+        font-size: 15px;
+        font-weight: bold;
         }
         .container {
             display: flex;
@@ -73,21 +77,19 @@
 </head>
 <body>
 <header>
-<video src="img/01.mp4" autoplay muted loop style="width:20%;"></video>
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
-                <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
-                <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
+                <td style="width: 200px; font-size:20px;" align="center"><a href="a-main.php">首頁</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-car.php">購物車</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">留言板</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>
         </div></div>
-
-
+        
 <h1 align="center">編輯權限</h1>
 <table align="center" border="1" style="width:700px">
         <tr align="center">
@@ -98,9 +100,8 @@
             <td>權限</td>
             <td>編輯</td>
         </tr>
-        <form action="del.php" method="get">
         <?php
-        include ("db.php");
+
         $sql="SELECT * FROM `user` WHERE 1";
         $res=mysqli_query($link,$sql);
         if(mysqli_num_rows($res)>0){
@@ -113,7 +114,7 @@
                     echo "<td>".$row["name"]."</td>";
                     echo "<td>".$row["type"]."</td>";
                     echo "<td><input type='button' value='修改(權限)'onclick=location.href='up.php?id=".$row['id']."'>
-                    <input type='button' value='刪除' onclick=location.href='del.php?id=".$row["id"]."'></td>";
+                    <input type='button' value='刪除' onclick=location.href='del2.php?id=".$row["id"]."'></td>";
                      echo "</tr>";
                 
                 }
@@ -121,7 +122,6 @@
             
             
         ?>
-        </form>
     </table>
 </body>
 </html>

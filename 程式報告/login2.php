@@ -16,7 +16,7 @@ if(mysqli_num_rows($res)>0){
 
             if($row['type']=="a"){
                 header("location:a-main.php");
-            }elseif($row['type']=="s"){
+            }elseif($row['type']=="o"){
                 header("location:seller.php");
             }else{
                 header("location:index-after.php");

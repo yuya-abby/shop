@@ -7,26 +7,26 @@
     <style>
         body {
 
-            background-color:rgb(240, 234, 234); /* 這是背景 */
+        background-color:rgb(255, 255, 255); /* 這是背景 */
         }
-           
+
         header {
-            background-color: #ff6600;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 30px;
+        background-color:rgb(255, 236, 215);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 30px;
 
         }
         header img{
-            height: 200px;
+        height: 200px;
         }
         .banner {
-            background: #ffcc00;
-            text-align: right;
-            padding: 8px;
-            font-size: 15px;
-            font-weight: bold;
+        background:rgb(255, 244, 180);
+        text-align: right;
+        padding: 8px;
+        font-size: 15px;
+        font-weight: bold;
         }
         .container {
             display: flex;
@@ -71,40 +71,75 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        .car-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .car-table th, .car-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .car-table img {
+            width: 80px;
+            height: auto;
+        }
+
+        .car-total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .box_fixed {
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            text-align: center;
+            
+        }
     </style>
 </head>
 <body>
 <header>
-<video src="img/01.mp4" autoplay muted loop style="width:20%;"></video>
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
-                <td style="width: 4%; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
+                <td style="width: 200px; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
-
+                <td align="center" style="width:100px; font-size:20px;"><a href="msg2.php">留言板</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="add-user.php">註冊</a></td>
             </tr>
         </table>
         </div></div>
-<h1 >購物車</h1>
+<h1 align="center">購物車</h1>
 <form action="" method="post">
     <table align="center">
+        <thead class="car-table">
+            <tr>
+                <td style="width: 500px; font-size:20px;">商品</td>
+                <td style="width: 300px; font-size:20px;">數量</td>
+                <td style="width: 300px; font-size:20px;">小計</td>
+                <td style="width: 300px; font-size:20px;">操作</td>
+            </tr>
+        </thead>
+    </table>
+    <table align="right">
     <tr>
-        <td></td>
-        <td><input type="text" name="img"><img style='height:200px' src=".$row['img']"></td>
-        </tr>
-
-        <tr>
-            <td></td>
-            <td><a href="#" class="button" onclick="location.href='count.php'">立即結帳</a></td>
-        </tr>
+        <td>
+            <div class="box_fixed">
+                <a href="#" class="button" onclick="location.href='count.php'" style="width: 100px;">立即結帳</a>
+            </div>
+        </td>
+    </tr>
     </table>
 
 </form>
-    
 </body>
 </html>

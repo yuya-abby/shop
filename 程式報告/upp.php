@@ -89,10 +89,10 @@
             </tr>
         </table>
         </div></div>
-    <h1 align="center">修改權限</h1>
+    <h1 align="center">修改帳號</h1>
  
         <table align="center" border="1">
-        <form action="up2.php" method="get">
+        <form action="upp2.php" method="get">
             <?php
             $id=$_GET['id'];
             $sql="SELECT * FROM `user` WHERE `id`='$id'";
@@ -113,8 +113,12 @@
                     echo "<td><input type='name' name='name' value='".$row['name']."'></td>";
                     echo "</tr>";
                     echo "<tr>";
-                    echo "<td>權限</td>";
-                    echo "<td><input type='type' name='type' value='".$row['type']."'></td>";
+                    echo "<td>電話</td>";
+                    echo "<td><input type='phone' name='phone' value='".$row['phone']."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>email</td>";
+                    echo "<td><input type='email' name='email' value='".$row['email']."'></td>";
                     echo "</tr>";
                     echo "<tr>";
                     echo "<td></td>";

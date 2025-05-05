@@ -8,26 +8,26 @@
     <style>
         body {
 
-            background-color:rgb(240, 234, 234); /* 這是背景 */
+        background-color:rgb(255, 255, 255); /* 這是背景 */
         }
-           
+
         header {
-            background-color: #ff6600;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 30px;
+        background-color:rgb(255, 236, 215);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 30px;
 
         }
         header img{
-            height: 200px;
+        height: 200px;
         }
         .banner {
-            background: #ffcc00;
-            text-align: right;
-            padding: 8px;
-            font-size: 15px;
-            font-weight: bold;
+        background:rgb(255, 244, 180);
+        text-align: right;
+        padding: 8px;
+        font-size: 15px;
+        font-weight: bold;
         }
         .container {
             display: flex;
@@ -77,20 +77,22 @@
 </head>
 <body>
 <header>
-<video src="img/01.mp4" autoplay muted loop style="width:20%;"></video>
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
-                <td style="width: 4%; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
+                <td style="width: 200px; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:5%; font-size:20px;"><a href="msg-after2.php">留言板</a></td>
-                <td align="center" style="width:4%; font-size:20px;"><a href="login.php">登出</a></td>
-                <td align="center" style="width:6%; font-size:20px;"><a href="admin.php">編輯權限</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="car.php">購物車</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="msg-after2.php">留言板</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>
         </div></div>
+        <form action="add-user2.php" method="get">
+        <h4 align="center">歡迎買家:<?php echo $_SESSION["account"]; ?></h4>
+    </form>
         <?php
     // 假設你已經連上資料庫 $link
 

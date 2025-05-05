@@ -1,11 +1,11 @@
 <?php
 include ("db.php");
-$account=$_POST["account"];  //接收資料
-$password=$_POST["password"];
-$name=$_POST["name"];
-$email=$_POST["email"];
-$phone=$_POST["phone"];
-$type=$_POST["type"];
+$account=$_GET["account"];  //接收資料
+$password=$_GET["password"];
+$name=$_GET["name"];
+$email=$_GET["email"];
+$phone=$_GET["phone"];
+$type=$_GET["type"];
 
 $sql="INSERT INTO `user`(`id`, `account`, `password`, `name`, `email`, `phone`,`type`)
  VALUES (null,'$account','$password','$name','$email','$phone','u')";
