@@ -72,7 +72,9 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>

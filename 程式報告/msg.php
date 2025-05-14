@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <?php include "db.php"; ?>
@@ -135,4 +135,4 @@
     </table>
 </form>
 </body>
-</html> -->
+</html>

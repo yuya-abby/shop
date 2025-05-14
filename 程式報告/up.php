@@ -72,7 +72,9 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -89,7 +91,7 @@
             </tr>
         </table>
         </div></div>
-    <h1 align="center">修改權限</h1>
+    <h1 align="center">修改帳號、權限</h1>
  
         <table align="center" border="1">
         <form action="up2.php" method="get">
@@ -106,11 +108,19 @@
                     echo "</tr>";
                     echo "<tr>";
                     echo "<td>密碼</td>";
-                    echo "<td><input type='password' name='password' value='".$row['password']."'></td>";
+                    echo "<td><input type='text' name='password' value='".$row['password']."'></td>";
                     echo "</tr>";
                     echo "<tr>";
                     echo "<td>姓名</td>";
                     echo "<td><input type='name' name='name' value='".$row['name']."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>電話</td>";
+                    echo "<td><input type='phone' name='phone' value='".$row['phone']."'></td>";
+                    echo "</tr>";
+                    echo "<tr>";
+                    echo "<td>email</td>";
+                    echo "<td><input type='email' name='email' value='".$row['email']."'></td>";
                     echo "</tr>";
                     echo "<tr>";
                     echo "<td>權限</td>";

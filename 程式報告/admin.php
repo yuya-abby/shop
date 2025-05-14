@@ -72,7 +72,9 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -81,22 +83,21 @@
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
-        
-                <td style="width: 200px; font-size:20px;" align="center"><a href="a-main.php">首頁</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="a-car.php">購物車</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">留言板</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">管理留言板</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>
         </div></div>
         
-<h1 align="center">編輯權限</h1>
+<h1 align="center">編輯帳號、權限</h1>
 <table align="center" border="1" style="width:700px">
         <tr align="center">
             <td>流水號</td>
             <td>帳號</td>
             <td>密碼</td>
             <td>姓名</td>
+            <td>電話</td>
+            <td>Email</td>
             <td>權限</td>
             <td>編輯</td>
         </tr>
@@ -112,6 +113,8 @@
                     echo "<td>".$row["account"]."</td>";
                     echo "<td>".$row["password"]."</td>";
                     echo "<td>".$row["name"]."</td>";
+                    echo "<td>".$row["phone"]."</td>";
+                    echo "<td>".$row["email"]."</td>";
                     echo "<td>".$row["type"]."</td>";
                     echo "<td><input type='button' value='修改(權限)'onclick=location.href='up.php?id=".$row['id']."'>
                     <input type='button' value='刪除' onclick=location.href='del2.php?id=".$row["id"]."'></td>";

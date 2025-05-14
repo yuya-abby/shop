@@ -72,7 +72,9 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -86,7 +88,7 @@
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="car.php">購物車</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登入</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="add-user.php">註冊</a></td>
             </tr>
         </table>
@@ -110,7 +112,7 @@ if (mysqli_num_rows($res) > 0) {
         echo "<h3>" . htmlspecialchars($name) . "</h3>";
         echo "<p>價格：$" . htmlspecialchars($money) . "</p>";
         // 購買按鈕，會把分類與價格送到 count.php
-        echo "<a href='login.php?product=" . urlencode($category) . "&price=" . urlencode($money) . "' class='button' type='button' color:white;' onclick=alert('請先登入')>立即購買</a>";
+        echo "<button class='button' style='color:white;' onclick=\"alert('請先登入'); location.href='login.php?id=".$row["id"]."'\">立即購買</button>";
         
         echo "</div>";
     }

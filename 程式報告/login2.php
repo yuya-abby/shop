@@ -15,7 +15,7 @@ if(mysqli_num_rows($res)>0){
             $_SESSION['name']=$row['name'];
 
             if($row['type']=="a"){
-                header("location:a-main.php");
+                header("location:admin.php");
             }elseif($row['type']=="o"){
                 header("location:seller.php");
             }else{

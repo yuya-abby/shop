@@ -1,123 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-    <?php include "db.php"; ?>
+<?php include "db.php"; ?>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
     <style>
         body {
-
-        background-color:rgb(255, 255, 255); /* 這是背景 */
+            background-color:rgb(255, 255, 255); 
+            font-family: Arial, sans-serif;
         }
-
         header {
-        background-color:rgb(255, 236, 215);
-        color: white;
-        padding: 15px;
-        text-align: center;
-        font-size: 30px;
-
+            background-color:rgb(255, 236, 215);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 30px;
         }
-        header img{
-        height: 200px;
+        header img {
+            height: 200px;
         }
         .banner {
-        background:rgb(255, 244, 180);
-        text-align: right;
-        padding: 8px;
-        font-size: 15px;
-        font-weight: bold;
+            background:rgb(255, 244, 180);
+            text-align: right;
+            padding: 8px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .navbar table {
+            width: 100%;
+        }
+        .navbar td {
+            font-size: 20px;
         }
         .container {
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
             margin: 20px;
-            
         }
-        .product {
-            background: white;
-            margin: 10px;
-            padding: 15px;
-            width: 250px;
-            text-align: center;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .product img {
+        .product-table, .info-table {
+            border-collapse: collapse;
             width: 100%;
-            border-radius: 5px;
+            margin-bottom: 20px;
         }
-        .product h3 {
-            font-size: 20px;
-            margin: 20px ;/*行間距*/
+        .product-table th, .product-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
         }
-        .product p {
-            color: #888;
+        .info-table td {
+            padding: 8px;
         }
-        .button {
-            display: inline-block;
+        .submit-btn {
             background: #ff6600;
             color: white;
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        a{
             text-decoration: none;
-            margin-top: 10px;
         }
-        .footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-        }
-        
     </style>
 </head>
 <body>
 <header>
-<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
+    <img src="img/嚕嚕2.png" autoplay muted loop style="width:80%;">
 </header>
-<div class="banner"><div class="navbar">
-        <table cellspacing="0" cellpadding="0" style="width:100%;">
-        
-                <td style="width: 200px; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
-                <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="car.php">購物車</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="msg2.php">留言板</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="add-user.php">註冊</a></td>
+<div class="banner">
+    <div class="navbar">
+        <table cellspacing="0" cellpadding="0">
+            <tr>
+                <td align="center"><a href="index-after.php">首頁</a></td>
+                <td align="center"><a href="msg-after2.php">留言板</a></td>
+                <td align="center"><a href="login.php">登出</a></td>
             </tr>
         </table>
-        </div></div>
-<h1 >確認訂單</h1>
-    <form action="check2.php" method="post">
-    <?php
-    $sql="SELECT * FROM `checkthing` WHERE 1";
-    $res=mysqli_query($link,$sql);
-    if(mysqli_num_rows($res)>0){
-        while($row=mysqli_fetch_assoc($res)){
-            echo "<table align='center' style='width:700px;' border='1' >";
-            echo "<tr style='height:50px;'>";
-            echo "<tr>"."<img style='height:200px' src='".$row['img']."'>"."</tr>";
-            echo "<td>:".$row['c_name']."</td>";
-            echo "<td>:".$row['address']."</td>";
-            echo "<td>:".$row['remark']."</td>";
-            echo "<td>:".$row['quantity']."</td>";
-            echo "<td>:".$row['money']."</td>";
-            echo "</tr>";
-            echo "<tr>";
-            echo "</tr>";
-            echo "<tr>";
-            echo "</tr>";
-            echo "</table>";
-            echo "<br>";
-        }
-    }   
-    
-    ?>
+    </div>
+</div>
 
-</form>
+<h1 align="center">確認訂單</h1>
+
+<div class="container">
+    <form action="" method="get">
+        <table class="product-table">
+            <tr>
+                <th>商品圖片</th>
+                <th>商品名稱</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>小計</th>
+            </tr>
+            <?php
+            $id = $_GET["id"];
+            $sql = "SELECT `id`, `img`, `money`, `category`, `name`, `c_name` FROM `addproduct` WHERE `id`='$id'";
+            $res = mysqli_query($link, $sql);
+
+            if (mysqli_num_rows($res) > 0) {
+                while ($row = mysqli_fetch_assoc($res)) {
+                    echo "<tr>";
+                    echo "<td><img src='".$row['img']."' style='height:100px; width:100px;'></td>";
+                    echo "<td>".$row["name"]."</td>";
+                    echo "<td><input style='width:50px;' type='number' name='quantity' value='1' min='1'></td>";
+                    echo "<td>".$row["money"]."</td>";
+                    echo "<td>".$row["money"]."</td>";
+                    echo "</tr>";
+                }
+            }
+            ?>
+        </table>
+
+        <h3 align="center">購買人資訊</h3>
+        <form action="count2.php" method="get">
+        <table class="info-table" align="center">
+            <tr>
+                <td>帳號：</td>
+                <td><input type="text" name="account" required></td>
+            </tr>
+            <tr>
+                <td>姓名：</td>
+                <td><input type="text" name="name" required></td>
+            </tr>
+            <tr>
+                <td>電話：</td>
+                <td><input type="text" name="phone" required></td>
+            </tr>
+            <tr>
+                <td>Email：</td>
+                <td><input type="email" name="email" required></td>
+            </tr>
+        </form>
+            <table class="info-table" align="center">
+            <tr>
+                <td>付款方式：</td>
+                <td>
+                    <select name="payment">
+                        <option value="credit">信用卡</option>
+                        <option value="atm">ATM轉帳</option>
+                        <option value="cod">貨到付款</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <div align="center">
+            <input class="submit-btn" type="submit" value="確認結帳" onclick="location.href='check.php'">
+        </div>
+    </form>
+</div>
 </body>
 </html>

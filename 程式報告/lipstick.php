@@ -72,7 +72,9 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -111,8 +113,7 @@ if (mysqli_num_rows($res) > 0) {
         echo "<h3>" . htmlspecialchars($name) . "</h3>";
         echo "<p>價格：$" . htmlspecialchars($money) . "</p>";
         // 購買按鈕，會把分類與價格送到 count.php
-        echo "<a href='login.php?product=" . urlencode($category) . "&price=" . urlencode($money) . "' class='button' type='button' color:white;' onclick=alert('請先登入')>立即購買</a>";
-        
+       echo "<button class='button' style='color:white;' onclick=\"alert('請先登入'); location.href='login.php?id=".$row["id"]."'\">立即購買</button>";
         echo "</div>";
     }
     echo "</div>";

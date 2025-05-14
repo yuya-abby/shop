@@ -72,8 +72,27 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-input {
+            padding-right: 40px;
+            width: 100%;
+        }
+        .toggle-icon {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
     </style>
+    
 </head>
 <body>
 <header>
@@ -96,7 +115,7 @@
         </tr>
         <tr>
             <td>密碼 :</td>
-            <td><input type="text" name="password"></td>
+            <td><input type="password" name="password"></td>
         </tr>
 
         <tr>

@@ -72,7 +72,9 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -90,20 +92,20 @@
         </table>
         </div></div>
 <h3>新增留言</h3>
-    <form action="msg-after3.php" method="get" enctype="multipart/form-data">
+    <form action="msg-after3.php" method="post" enctype="multipart/form-data">
     <table border="1" style="width:500px; ">
         <tr>
             <td style="height:50px;">標題</td>
-            <td><input type="text" name="title"></td>
+            <td><input type="text" name="title" require></td>
             
         </tr>
         <tr>
             <td style="height:100px;">內容</td>
-            <td><input type="text" name="text"></td>
+            <td><input type="text" name="text" require></td>
         </tr>
         <tr>
             <td>圖片</td>
-            <td><input type="file" style="height:100px;" name="img"></td>
+            <td><input type="file" style="height:100px;" name="img" require accept="image*/"></td>
         </tr>
         <tr>
             <td><input type="submit" value="新增"></td>

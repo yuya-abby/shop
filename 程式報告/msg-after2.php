@@ -28,6 +28,7 @@
         padding: 8px;
         font-size: 15px;
         font-weight: bold;
+
         }
         .container {
             display: flex;
@@ -62,8 +63,8 @@
             color: white;
             padding: 10px;
             border-radius: 5px;
-            text-decoration: none;
             margin-top: 10px;
+            text-decoration: none;
         }
         .footer {
             background: #333;
@@ -72,7 +73,9 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -93,7 +96,7 @@
     <div align="center"><input type="button" value="新增留言" onclick="location.href='msg-after.php'"><br><br></div>
     <form action="msg-after3.php" method="get">
     <?php
-    $sql="SELECT * FROM `msg` WHERE 1";
+    $sql="SELECT * FROM `msg` WHERE 1 ORDER BY id DESC";
     $res=mysqli_query($link,$sql);
     if(mysqli_num_rows($res)>0){
         while($row=mysqli_fetch_assoc($res)){
@@ -104,7 +107,7 @@
             echo "</tr>";
             echo "<tr>";
             echo "<tr style='height:300px'><td colspan='2'>".'留言:'.$row["text"]."<br>".
-            "<img style='height:200px' src='".$row['img']."'>"."</td></tr>";
+            "<img style='height:200px' src='msgimg/".$row['img']."'>"."</td></tr>";
             echo "</tr>";
             echo "<tr>";
             echo "<td>發布時間:".$row['add_time']."</td>";
