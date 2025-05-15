@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-12 04:20:17
+-- 產生時間： 2025-05-15 05:15:32
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.0.30
 
@@ -72,12 +72,10 @@ CREATE TABLE `countmoney` (
   `id` int(11) NOT NULL,
   `img` text NOT NULL,
   `name` varchar(20) NOT NULL,
-  `address` varchar(20) NOT NULL,
-  `word` varchar(20) NOT NULL,
-  `number` varchar(20) NOT NULL,
+  ` quantity` varchar(20) NOT NULL,
+  `c_money` varchar(20) NOT NULL,
   `money` varchar(20) NOT NULL,
-  `account` varchar(20) NOT NULL,
-  `c_name` varchar(20) NOT NULL
+  `payment` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -106,7 +104,11 @@ INSERT INTO `msg` (`id`, `account`, `title`, `text`, `img`, `add_time`, `up_time
 (13, 'aaaa', 'sdsdccds', 'dcscsdscd', '', '2025-05-01 14:14:39', NULL),
 (20, 'aaaa', '', 'sad', '', '2025-05-03 11:47:28', NULL),
 (23, 'aaaa', '44444', '4444444', '', '2025-05-06 11:57:48', NULL),
-(24, 'aaaa', 'asdfsd', '', '', '2025-05-06 12:02:42', NULL);
+(24, 'aaaa', 'asdfsd', '', '', '2025-05-06 12:02:42', NULL),
+(26, 'aaaa', '456', '456456', '', '2025-05-12 10:31:44', NULL),
+(30, 'aaaa', '456', '456456', '20250512043325_7818.jpg', '2025-05-12 10:33:25', NULL),
+(31, 'aaaa', 'sfda', 'fds', '20250512054701_3094.jpg', '2025-05-12 11:47:01', NULL),
+(33, 'aaaa', 'dfas', 'fsad', '20250513054324_5475.jpg', '2025-05-13 11:43:24', NULL);
 
 -- --------------------------------------------------------
 
@@ -121,19 +123,17 @@ CREATE TABLE `user` (
   `name` varchar(20) NOT NULL,
   `email` varchar(30) NOT NULL,
   `phone` text NOT NULL,
-  `type` varchar(2) NOT NULL,
-  `c_name` varchar(20) NOT NULL,
-  `img` text NOT NULL
+  `type` varchar(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 傾印資料表的資料 `user`
 --
 
-INSERT INTO `user` (`id`, `account`, `password`, `name`, `email`, `phone`, `type`, `c_name`, `img`) VALUES
-(5, 'aaaa', '123', 'bbacc', 'asdfd@gmai.com', 'sdfsd', 'u', '口紅', ''),
-(6, 'bbb', '123', '賣家', 'hfdhgf@gmail.com', 'afds', 'o', '', ''),
-(7, 'admin', '123', '管理員', 'asdfas@gmail.com', 'adsffdas', 'a', '', '');
+INSERT INTO `user` (`id`, `account`, `password`, `name`, `email`, `phone`, `type`) VALUES
+(5, 'aaaa', '123', 'bbacc', 'asdfd@gmai.com', 'sdfsd', 'u'),
+(6, 'bbb', '123', '賣家', 'hfdhgf@gmail.com', 'afds', 'o'),
+(7, 'admin', '123', '管理員', 'asdfas@gmail.com', 'adsffdas', 'a');
 
 --
 -- 已傾印資料表的索引
@@ -183,7 +183,7 @@ ALTER TABLE `countmoney`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `msg`
 --
 ALTER TABLE `msg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
