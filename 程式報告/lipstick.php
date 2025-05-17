@@ -72,9 +72,7 @@
             padding: 15px;
             margin-top: 20px;
         }
-        a{
-            text-decoration: none;
-        }
+        
     </style>
 </head>
 <body>
@@ -110,10 +108,11 @@ if (mysqli_num_rows($res) > 0) {
 
         echo "<div class='product'>";
         echo "<a src='".$row['name'].".php'><img src='".$row['img']."' onclick=\"location.href='count'\" style='height:200px; width:200px; cursor:pointer;'></img></a>";
-        echo "<h3>" . htmlspecialchars($name) . "</h3>";
-        echo "<p>價格：$" . htmlspecialchars($money) . "</p>";
+        echo "<h3>" . $row['name'] . "</h3>";
+        echo "<p>價格：$" . $row['money'] . "</p>";
         // 購買按鈕，會把分類與價格送到 count.php
-       echo "<button class='button' style='color:white;' onclick=\"alert('請先登入'); location.href='login.php?id=".$row["id"]."'\">立即購買</button>";
+       echo "<button class='button' style='color:white;' onclick=\"alert('請先登入'); location.href='login.php?id=".$row["id"]."'\">加入購物車</button>";
+        echo "<button class='button' style='color:white;' onclick=\"alert('請先登入'); location.href='login.php?id=".$row["id"]."'\">立即購買</button>";
         echo "</div>";
     }
     echo "</div>";

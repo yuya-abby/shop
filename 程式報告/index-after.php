@@ -72,9 +72,7 @@
             padding: 15px;
             margin-top: 20px;
         }
-        a{
-            text-decoration: none;
-        }
+        
     </style>
 </head>
 <body>
@@ -82,8 +80,9 @@
 <img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
 </header>
 <div class="banner"><div class="navbar">
+    <form action="" method="get">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
-        
+            <tr>
                 <td style="width: 200px; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="car.php">購物車</a></td>
@@ -91,6 +90,7 @@
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>
+    </form>
         </div></div>
         <form action="add-user2.php" method="get">
         <h4 align="center">歡迎買家:<?php echo $_SESSION["account"]; ?></h4>
@@ -106,7 +106,14 @@
         'lipstick' => 'lipstick2.php'
     ];
 
-    $sql = "SELECT id, img, category, c_name FROM addproduct GROUP BY category"; // 只撈出每種分類一筆（避免重複）
+    $sql = "SELECT * FROM `addproduct` WHERE 1"; // 只撈出每種分類一筆（避免重複）
+            // GROUP BY category
+
+            if(isset($_GET['keyword']) && $_GET['keyword'] != ''){
+                $keyword = $_GET['keyword'];
+                $sql.=" AND `category` LIKE '%$keyword%'";
+            }
+            $sql.=" GROUP BY category";
     $res = mysqli_query($link, $sql);
 
     if (mysqli_num_rows($res) > 0) {

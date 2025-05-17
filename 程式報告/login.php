@@ -119,7 +119,8 @@
         </tr>
 
         <tr>
-        <td><input type="submit" value="登入"></td>
+            
+        <td><input type="submit" value="登入" class="button"></td>
         </tr>
 
         </table>

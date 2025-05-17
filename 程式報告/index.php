@@ -72,9 +72,7 @@
             padding: 15px;
             margin-top: 20px;
         }
-        a{
-            text-decoration: none;
-        }
+        
     </style>
 </head>
 <body>
@@ -82,6 +80,7 @@
 <img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
 </header>
 <div class="banner"><div class="navbar">
+    <form action="" method="get">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
                 <td style="width: 200px; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
@@ -93,34 +92,41 @@
         </table>
         </div></div>
         <?php
-    // 假設你已經連上資料庫 $link
+            // 假設你已經連上資料庫 $link
 
-    $link_map = [
-        '男裝' => 'shirt-boy.php',
-        '女裝' => 'shirt-girl.php',
-        '手機殼' => 'phone.php',
-        '耳機殼' => 'earphone.php',
-        '口紅' => 'lipstick.php'
-    ];
+            $link_map = [
+                '男裝' => 'shirt-boy.php',
+                '女裝' => 'shirt-girl.php',
+                '手機殼' => 'phone.php',
+                '耳機殼' => 'earphone.php',
+                '口紅' => 'lipstick.php'
+            ];
 
-    $sql = "SELECT id, img, category FROM addproduct GROUP BY category"; // 只撈出每種分類一筆（避免重複）
-    $res = mysqli_query($link, $sql);
+            $sql = "SELECT * FROM `addproduct` WHERE 1"; // 只撈出每種分類一筆（避免重複）
+            // GROUP BY category
 
-    if (mysqli_num_rows($res) > 0) {
-        echo "<div class='container'>";
-        while ($row = mysqli_fetch_assoc($res)) {
-            $category = $row['category'];
-            $img = $row['img'];
-            $link = isset($link_map[$category]) ? $link_map[$category] : '#';
+            if(isset($_GET['keyword']) && $_GET['keyword'] != ''){
+                $keyword = $_GET['keyword'];
+                $sql.=" AND `category` LIKE '%$keyword%'";
+            }
+            $sql.=" GROUP BY category";
+            $res = mysqli_query($link, $sql);
 
-            echo "<div class='product'>";
-            echo "<img src='".$row['img']."' onclick=\"location.href='{$link}'\" style='height:200px; width:200px;'>";
-            echo "<h3>" . htmlspecialchars($category) . "</h3>";
-            echo "</div>";
-        }
-        echo "</div>";
-    }
-?>
+            if (mysqli_num_rows($res) > 0) {
+                echo "<div class='container'>";
+                while ($row = mysqli_fetch_assoc($res)) {
+                    $category = $row['category'];
+                    $img = $row['img'];
+                    $link = isset($link_map[$category]) ? $link_map[$category] : '#';
+
+                    echo "<div class='product'>";
+                    echo "<img src='".$row['img']."' onclick=\"location.href='{$link}'\" style='height:200px; width:200px;'>";
+                    echo "<h3>" . htmlspecialchars($category) . "</h3>";
+                    echo "</div>";
+                }
+                echo "</div>";
+            }
+        ?>
     </form>
 </body>
 </html>

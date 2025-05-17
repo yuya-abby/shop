@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
@@ -101,9 +102,6 @@
             text-align: center;
             
         }
-        a{
-            text-decoration: none;
-        }
     </style>
 </head>
 <body>
@@ -112,12 +110,14 @@
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
-        
+            <tr>
+            <form action="" method="get">
                 <td style="width: 200px; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
                 <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="msg2.php">留言板</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="add-user.php">註冊</a></td>
+            </form>
             </tr>
         </table>
         </div></div>
@@ -126,11 +126,31 @@
     <table align="center">
         <thead class="car-table">
             <tr>
-                <td style="width: 500px; font-size:20px;">商品</td>
+                <td style="width: 500px; font-size:20px;">商品圖片</td>
+                <td style="width: 500px; font-size:20px;">商品名稱</td>
                 <td style="width: 300px; font-size:20px;">數量</td>
                 <td style="width: 300px; font-size:20px;">小計</td>
-                <td style="width: 300px; font-size:20px;">操作</td>
             </tr>
+                <?php
+                    $sql="SELECT * FROM `car` WHERE 1";
+
+                    if(isset($_GET['keyword']) && $_GET['keyword'] != ''){
+                        $keyword = $_GET['keyword'];
+                        $sql.=" AND `addproduct_name` LIKE '%$keyword%'";
+                    }
+                    $res=mysqli_query($link,$sql);
+
+                    if(mysqli_num_rows($res)>0){
+                        while($row=mysqli_fetch_assoc($res)){
+                            echo "<tr>
+                                <td><img src='".$row['addproduct_img']."' width='200px'></td>
+                                <td>".$row['addproduct_name']."</td>
+                                <td>".$row['addproduct_count']."</td>
+                                <td>".$row['addproduct_money']."</td>
+                            </tr>";
+                        }
+                    }
+                ?>
         </thead>
     </table>
     <table align="right">

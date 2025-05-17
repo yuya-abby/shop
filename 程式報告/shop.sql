@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-17 07:41:19
+-- 產生時間： 2025-05-17 09:41:23
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.0.30
 
@@ -53,14 +53,29 @@ INSERT INTO `addproduct` (`id`, `img`, `money`, `category`, `name`, `c_name`) VA
 (10, 'img/耳機殼2.jpg', 100.00, '耳機殼', '耳機殼2', 'earphone'),
 (11, 'img/耳機殼3.jpg', 100.00, '耳機殼', '耳機殼3', 'earphone'),
 (12, 'img/耳機殼4.jpg', 100.00, '耳機殼', '耳機殼4', 'earphone'),
-(13, 'img/衣服女1.jpg', 599.00, '女裝', '衣服女1', 'shirt-girl'),
-(14, 'img/衣服女2.jpg', 599.00, '女裝', '衣服女2', 'shirt-girl'),
-(15, 'img/衣服女3.jpg', 599.00, '女裝', '衣服女3', 'shirt-girl'),
-(16, 'img/衣服女4.jpg', 599.00, '女裝', '衣服女4', 'shirt-girl'),
-(17, 'img/衣服男1.jpg', 599.00, '男裝', '衣服男1', 'shirt-boy'),
-(18, 'img/衣服男2.jpg', 599.00, '男裝', '衣服男2', 'shirt-boy'),
-(19, 'img/衣服男3.jpg', 599.00, '男裝', '衣服男3', 'shirt-boy'),
-(20, 'img/衣服男4.jpg', 599.00, '男裝', '衣服男4', 'shirt-boy');
+(13, 'img/衣服女1.jpg', 599.00, '女裝', '女裝1', 'shirt-girl'),
+(14, 'img/衣服女2.jpg', 599.00, '女裝', '女裝2', 'shirt-girl'),
+(15, 'img/衣服女3.jpg', 599.00, '女裝', '女裝3', 'shirt-girl'),
+(16, 'img/衣服女4.jpg', 599.00, '女裝', '女裝4', 'shirt-girl'),
+(17, 'img/衣服男1.jpg', 599.00, '男裝', '男裝1', 'shirt-boy'),
+(18, 'img/衣服男2.jpg', 599.00, '男裝', '男裝2', 'shirt-boy'),
+(19, 'img/衣服男3.jpg', 599.00, '男裝', '男裝3', 'shirt-boy'),
+(20, 'img/衣服男4.jpg', 599.00, '男裝', '男裝4', 'shirt-boy');
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `car`
+--
+
+CREATE TABLE `car` (
+  `id` int(11) NOT NULL,
+  `addproduct_id` int(11) NOT NULL,
+  `addproduct_name` varchar(20) NOT NULL,
+  `addproduct_money` int(11) NOT NULL,
+  `addproduct_count` int(11) NOT NULL,
+  `addproduct_img` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -118,7 +133,8 @@ INSERT INTO `msg` (`id`, `account`, `title`, `text`, `img`, `add_time`, `up_time
 (26, 'aaaa', '456', '456456', '', '2025-05-12 10:31:44', NULL),
 (30, 'aaaa', '456', '456456', '20250512043325_7818.jpg', '2025-05-12 10:33:25', NULL),
 (31, 'aaaa', 'sfda', 'fds', '20250512054701_3094.jpg', '2025-05-12 11:47:01', NULL),
-(33, 'aaaa', 'dfas', 'fsad', '20250513054324_5475.jpg', '2025-05-13 11:43:24', NULL);
+(33, 'aaaa', 'dfas', 'fsad', '20250513054324_5475.jpg', '2025-05-13 11:43:24', NULL),
+(34, 'bbb', '65861232', '655612', '20250517074500_5083.jpg', '2025-05-17 13:45:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -157,6 +173,12 @@ ALTER TABLE `addproduct`
   ADD PRIMARY KEY (`id`);
 
 --
+-- 資料表索引 `car`
+--
+ALTER TABLE `car`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- 資料表索引 `countmoney`
 --
 ALTER TABLE `countmoney`
@@ -185,6 +207,12 @@ ALTER TABLE `addproduct`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
+-- 使用資料表自動遞增(AUTO_INCREMENT) `car`
+--
+ALTER TABLE `car`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- 使用資料表自動遞增(AUTO_INCREMENT) `countmoney`
 --
 ALTER TABLE `countmoney`
@@ -194,7 +222,7 @@ ALTER TABLE `countmoney`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `msg`
 --
 ALTER TABLE `msg`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
