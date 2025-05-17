@@ -82,96 +82,77 @@
 <h1 align="center">結帳資訊</h1>
 
 <div class="container">
-    <form action="" method="get">
-        <table class="product-table">
-            <tr>
-                <th>商品圖片</th>
-                <th>商品名稱</th>
-                <th>數量</th>
-                <th>單價</th>
-                <th>小計</th>
-            </tr>
-            <?php
-            $id = $_GET["id"];
-            $sql = "SELECT `id`, `img`, `money`, `category`, `name`, `c_name` FROM `addproduct` WHERE `id`='$id'";
-            $res = mysqli_query($link, $sql);
+    <form action="count2.php" method="post">
+    <table class="product-table">
+        <tr>
+            <th>商品圖片</th>
+            <th>商品名稱</th>
+            <th>數量</th>
+            <th>單價</th>
+            <th>小計</th>
+        </tr>
+        <?php
+        $id = $_GET["id"];
+        $sql = "SELECT `id`, `img`, `money`, `category`, `name`, `c_name` FROM `addproduct` WHERE `id`='$id'";
+        $res = mysqli_query($link, $sql);
 
-            if (mysqli_num_rows($res) > 0) {
-                  while ($row = mysqli_fetch_assoc($res)) {
-                    echo "<tr>";
-                    echo "<td><img src='" . $row['img'] . "' style='height:100px; width:100px;'></td>";
-                    echo "<td>" . $row["name"] . "</td>";
-                    
-                    // 數量輸入框，name 設成 array 形式方便後續處理
-                    echo "<td><input style='width:50px;' type='number' name='quantity[{$row["id"]}]' value='1' min='1' 
-                            onchange='updateTotal(this, {$row["money"]}, {$row["id"]})'></td>";
-                    
-                    echo "<td>" . number_format($row["money"], 2) . "</td>";
-                    
-                    // 顯示小計
-                    echo "<td id='total-{$row["id"]}'>" . number_format($row["money"], 2) . "</td>";
-                    echo "</tr>";
-                }
-
-                    echo "</form>";
-                } else {
-                    echo "沒有資料";
-                }
-                ?>
-
-            <!-- JavaScript 動態更新小計 -->
-            <script>
-            function updateTotal(element, price, id) {
-                const quantity = element.value;
-                const total = (price * quantity).toFixed(2);
-                document.getElementById(`total-${id}`).innerText = total;
+        if (mysqli_num_rows($res) > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                echo "<tr>";
+                echo "<td><img src='" . $row['img'] . "' style='height:100px; width:100px;'></td>";
+                echo "<td>" . $row["name"] . "</td>";
+                echo "<td><input style='width:50px;' type='number' name='quantity[{$row["id"]}]' value='1' min='1' onchange='updateTotal(this, {$row["money"]}, {$row["id"]})'></td>";
+                echo "<td>" . number_format($row["money"], 2) . "</td>";
+                echo "<td id='total-{$row["id"]}'>" . number_format($row["money"], 2) . "</td>";
+                echo "</tr>";
             }
-            </script>
-        </table>
+        } else {
+            echo "沒有資料";
+        }
+        ?>
+    </table>
 
-        <h3 align="center">購買人資訊</h3>
-        <form action="login.php" method="post">
-        <table class="info-table" align="center">
-            <?php
-            $account = $_SESSION["account"]; // 從 Session 中獲取登入的帳號
+    <h3 align="center">購買人資訊</h3>
+    <table class="info-table" align="center">
+        <?php
+        $account = $_SESSION["account"];
+        $sql = "SELECT * FROM `user` WHERE `account` = '$account'";
+        $res = mysqli_query($link, $sql);
 
-            $sql = "SELECT * FROM `user` WHERE `account` = '$account'";
-            $res = mysqli_query($link, $sql);
+        if (mysqli_num_rows($res) > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                echo "<tr><td>帳號：" . $row["account"] . "</td></tr>";
+                echo "<tr><td>姓名：" . $row["name"] . "</td></tr>";
+                echo "<tr><td>電話：" . $row["phone"] . "</td></tr>";
+                echo "<tr><td>Email：" . $row["email"] . "</td></tr>";
+            }
+        }
+        ?>
+        <tr>
+            <td>付款方式：</td>
+            <td>
+                <select name="payment">
+                    <option value="credit">信用卡</option>
+                    <option value="atm">ATM轉帳</option>
+                    <option value="cod">貨到付款</option>
+                </select>
+            </td>
+        </tr>
+    </table>
 
-            if (mysqli_num_rows($res) > 0) {
-                while ($row = mysqli_fetch_assoc($res)) {
-                    echo "<tr>";
-                    echo "<td>帳號：" . $row["account"] . "</td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                    echo "<td>姓名：" . $row["name"] . "</td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                    echo "<td>電話：" . $row["phone"] . "</td>";
-                    echo "</tr>";
-                    echo "<tr>";
-                    echo "<td>Email：" . $row["email"] . "</td>";
-                    echo "</tr>";
+    <div align="center">
+        <input class="submit-btn" type="submit" value="確認結帳">
+    </div>
+</form>
+
+<script>
+    function updateTotal(element, price, id) {
+        const quantity = element.value;
+        const total = (price * quantity).toFixed(2);
+        document.getElementById(`total-${id}`).innerText = total;
     }
-}
-?>
-            
-            <table class="info-table" align="center">
-            <tr>
-                <td>付款方式：</td>
-                <td>
-                    <select name="payment">
-                        <option value="credit">信用卡</option>
-                        <option value="atm">ATM轉帳</option>
-                        <option value="cod">貨到付款</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <div align="center">
-            <input class="submit-btn" type="submit" value="確認結帳" >
-        </div>
-    </form>
+</script>
+
 </div>
 </body>
 </html>

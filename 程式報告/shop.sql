@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-15 05:15:32
+-- 產生時間： 2025-05-17 07:41:19
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.0.30
 
@@ -70,13 +70,23 @@ INSERT INTO `addproduct` (`id`, `img`, `money`, `category`, `name`, `c_name`) VA
 
 CREATE TABLE `countmoney` (
   `id` int(11) NOT NULL,
-  `img` text NOT NULL,
-  `name` varchar(20) NOT NULL,
-  ` quantity` varchar(20) NOT NULL,
-  `c_money` varchar(20) NOT NULL,
-  `money` varchar(20) NOT NULL,
-  `payment` varchar(20) NOT NULL
+  `account` varchar(50) NOT NULL,
+  `c_id` int(11) NOT NULL,
+  `c_name` varchar(100) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL,
+  `payment_method` varchar(20) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `countmoney`
+--
+
+INSERT INTO `countmoney` (`id`, `account`, `c_id`, `c_name`, `quantity`, `price`, `subtotal`, `payment_method`, `order_date`) VALUES
+(1, 'aaaa', 19, '衣服男3', 1, 599.00, 599.00, 'credit', '2025-05-15 06:05:28'),
+(2, 'aaaa', 2, '口紅2', 3, 299.00, 897.00, 'atm', '2025-05-17 05:39:40');
 
 -- --------------------------------------------------------
 
@@ -133,7 +143,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `account`, `password`, `name`, `email`, `phone`, `type`) VALUES
 (5, 'aaaa', '123', 'bbacc', 'asdfd@gmai.com', 'sdfsd', 'u'),
 (6, 'bbb', '123', '賣家', 'hfdhgf@gmail.com', 'afds', 'o'),
-(7, 'admin', '123', '管理員', 'asdfas@gmail.com', 'adsffdas', 'a');
+(7, 'admin', '123', '管理員', 'asdfas@gmail.com', 'adsffdas', 'a'),
+(8, 'bbb', '123', 'abc', '112534@gmail.com', 'svdcvc', 'u');
 
 --
 -- 已傾印資料表的索引
@@ -177,7 +188,7 @@ ALTER TABLE `addproduct`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `countmoney`
 --
 ALTER TABLE `countmoney`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `msg`
@@ -189,7 +200,7 @@ ALTER TABLE `msg`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
