@@ -65,7 +65,7 @@
 </head>
 <body>
 <header>
-    <img src="img/嚕嚕2.png" autoplay muted loop style="width:80%;">
+    <img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner">
     <div class="navbar">
@@ -82,7 +82,7 @@
 <h1 align="center">結帳資訊</h1>
 
 <div class="container">
-    <form action="count2.php" method="post">
+    <form action="count2.php" method="post" enctype="multipart/form-data">
     <table class="product-table">
         <tr>
             <th>商品圖片</th>
@@ -95,11 +95,11 @@
         $id = $_GET["id"];
         $sql = "SELECT `id`, `img`, `money`, `category`, `name`, `c_name` FROM `addproduct` WHERE `id`='$id'";
         $res = mysqli_query($link, $sql);
-
         if (mysqli_num_rows($res) > 0) {
             while ($row = mysqli_fetch_assoc($res)) {
                 echo "<tr>";
                 echo "<td><img src='" . $row['img'] . "' style='height:100px; width:100px;'></td>";
+                echo "<input type='hidden' value='".$row['img']."' name='img'>";
                 echo "<td>" . $row["name"] . "</td>";
                 echo "<td><input style='width:50px;' type='number' name='quantity[{$row["id"]}]' value='1' min='1' onchange='updateTotal(this, {$row["money"]}, {$row["id"]})'></td>";
                 echo "<td>" . number_format($row["money"], 2) . "</td>";
@@ -109,6 +109,7 @@
         } else {
             echo "沒有資料";
         }
+        echo "<input type='hidden' name='id' value='".$id."'>";
         ?>
     </table>
 
@@ -128,11 +129,11 @@
             }
         }
         ?>
+        
         <tr>
             <td>付款方式：</td>
             <td>
                 <select name="payment">
-                    <option value="credit">信用卡</option>
                     <option value="atm">ATM轉帳</option>
                     <option value="cod">貨到付款</option>
                 </select>

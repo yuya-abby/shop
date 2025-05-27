@@ -79,7 +79,7 @@
 </head>
 <body>
 <header>
-<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">

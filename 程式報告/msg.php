@@ -94,12 +94,14 @@
             justify-content: center;
             align-items: center;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 <header>
-<video src="img/01.mp4" autoplay muted loop style="width:20%;"></video>
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">

@@ -4,7 +4,7 @@
     <?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>噜噜咪賣貨便</title>
+    <title>Document</title>
     <style>
         body {
 
@@ -100,15 +100,32 @@
             right: 0;
             bottom: 0;
             text-align: center;
-            
         }
-        a{
-            text-decoration: none;
+        .quantity-selector {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .quantity-selector button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background-color: #f0f0f0;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .quantity-selector input[type="text"] {
+            width: 40px;
+            text-align: center;
+            border: none;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-<header>
+    <header>
 <img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner"><div class="navbar">
@@ -116,56 +133,35 @@
             <tr>
             <form action="" method="get">
                 <td style="width: 200px; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
-                <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="msg2.php">留言板</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="add-user.php">註冊</a></td>
             </form>
             </tr>
         </table>
-        </div></div>
-<h1 align="center">購物車</h1>
-<form action="" method="post">
-    <table align="center">
-        <thead class="car-table">
-            <tr>
-                <td style="width: 500px; font-size:20px;">商品圖片</td>
-                <td style="width: 500px; font-size:20px;">商品名稱</td>
-                <td style="width: 300px; font-size:20px;">數量</td>
-                <td style="width: 300px; font-size:20px;">小計</td>
-            </tr>
+</div></div>
+    <div id='bbb' align='center'>
+        <form action="car4.php" method="GET">
+            <div style='width:40%; margin: 10px;'>
                 <?php
-                    $sql="SELECT * FROM `car` WHERE 1";
-
-                    if(isset($_GET['keyword']) && $_GET['keyword'] != ''){
-                        $keyword = $_GET['keyword'];
-                        $sql.=" AND `addproduct_name` LIKE '%$keyword%'";
-                    }
+                    $id=$_GET['id'];
+                    $sql="SELECT * FROM `addproduct` WHERE `id` = '$id'";
                     $res=mysqli_query($link,$sql);
-
                     if(mysqli_num_rows($res)>0){
                         while($row=mysqli_fetch_assoc($res)){
-                            echo "<tr>
-                                <td><img src='".$row['addproduct_img']."' width='200px'></td>
-                                <td>".$row['addproduct_name']."</td>
-                                <td>".$row['addproduct_count']."</td>
-                                <td>".$row['addproduct_money']."</td>
-                            </tr>";
+                            echo "<br><img src='".$row['img']."' height='350px'><br>
+                            <h2>價錢：".$row['money']."</h2>
+                            <p style='font-size: 20px;'>購買數量：<input type='number' name='buy_count' style='height: 25px; width: 200px;' min='0'></p>
+                            <input type='hidden' name='id' value='".$row['id']."'>
+                            <input type='submit' value='加入購物車'>　<input type='button' value='取消' onclick=location.href='buy.php'><br>
+                            <p>　</p>";
                         }
                     }
                 ?>
-        </thead>
-    </table>
-    <table align="right">
-    <tr>
-        <td>
-            <div class="box_fixed">
-                <a href="#" class="button" onclick="location.href='count.php'" style="width: 100px;">立即結帳</a>
             </div>
-        </td>
-    </tr>
-    </table>
+        </form>
+    </div>
 
-</form>
+    
 </body>
 </html>

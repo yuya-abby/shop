@@ -79,13 +79,12 @@
 </head>
 <body>
 <header>
-<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
-                <td style="width: 200px; font-size:20px;" align="center"><a href="a-main.php">首頁</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="a-car.php">購物車</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-main.php">首頁</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">留言板</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
@@ -124,8 +123,15 @@
                     echo "</tr>";
                     echo "<tr>";
                     echo "<td>權限</td>";
-                    echo "<td><input type='type' name='type' value='".$row['type']."'></td>";
+                    echo "<td>
+                        <select name='type'>
+                            <option value='a'" . ($row['type'] == 'a' ? ' selected' : '') . ">管理員</option>
+                            <option value='o'" . ($row['type'] == 'o' ? ' selected' : '') . ">賣家</option>
+                            <option value='u'" . ($row['type'] == 'u' ? ' selected' : '') . ">買家</option>
+                        </select>
+                    </td>";
                     echo "</tr>";
+
                     echo "<tr>";
                     echo "<td></td>";
                     echo "<td></td>";

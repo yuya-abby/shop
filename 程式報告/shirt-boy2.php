@@ -79,7 +79,7 @@
 </head>
 <body>
 <header>
-<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
@@ -113,7 +113,7 @@ if (mysqli_num_rows($res) > 0) {
         echo "<h3>" . $row['name'] . "</h3>";
         echo "<p>價格：$" . $row['money'] . "</p>";
         // 購買按鈕，會把分類與價格送到 count.php
-        echo "<button class='button' onclick=location.href='car.php?id=".$row["id"]."'>加入購物車</button>";
+        echo "<button class='button' onclick=location.href='car3.php?id=".$row["id"]."'>加入購物車</button>";
          echo "<button class='button' onclick=location.href='count.php?id=".$row["id"]."'>立即購買</button>";
         
         echo "</div>";

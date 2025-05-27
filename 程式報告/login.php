@@ -91,17 +91,20 @@
             width: 20px;
             height: 20px;
         }
+        a{
+            text-decoration: none;
+        }
     </style>
     
 </head>
 <body>
 <header>
-<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
         
-                <td style="width: 200px; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
+                <td align="center" style="width:100px; font-size:20px;" ><a href="index.php">首頁</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="add-user.php">註冊</a></td>
             </tr>
         </table>

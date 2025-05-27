@@ -72,12 +72,14 @@
             padding: 15px;
             margin-top: 20px;
         }
-        
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
 <header>
-<img src="img\嚕嚕2.png" autoplay muted loop style="width:80%;">
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 <div class="banner"><div class="navbar">
     <form action="" method="get">
