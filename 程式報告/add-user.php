@@ -111,6 +111,10 @@
                 <td><input type="password" name="password"></td>
             </tr>
             <tr>
+                <td>確認密碼:</td>
+                <td><input type="password" name="password2"></td>
+            </tr>
+            <tr>
                 <td>信箱:</td>
                 <td><input type="text" name="email"></td>
             </tr>

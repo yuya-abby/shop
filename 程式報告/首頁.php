@@ -4,28 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
-</head>
-<style>
- body {
+    <style>
+        body {
 
-    background-color:rgb(240, 234, 234); /* 這是背景 */
-
-}
-header {
-            background-color: #ff6600;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 30px;
-}
-.banner {
-            background: #ffcc00;
-            text-align: right;
-            padding: 8px;
-            font-size: 15px;
-            font-weight: bold;
+        background-color:rgb(255, 255, 255); /* 這是背景 */
         }
-.container {
+
+        header {
+        background-color:rgb(255, 236, 215);
+        color: white;
+        padding: 15px;
+        text-align: center;
+        font-size: 30px;
+
+        }
+        header img{
+        height: 200px;
+        }
+        .banner {
+        background:rgb(255, 244, 180);
+        text-align: right;
+        padding: 8px;
+        font-size: 15px;
+        font-weight: bold;
+        }
+        .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -68,31 +71,37 @@ header {
             padding: 15px;
             margin-top: 20px;
         }
-        
-</style>
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
 <body>
-<header>噜噜咪賣貨便</header>
-      <div class="banner"><div class="navbar">
-      <table cellspacing="0" cellpadding="0" style="width:100%;">
+<header>
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
+</header>
+<div class="banner"><div class="navbar">
+<table cellspacing="0" cellpadding="0" style="width:100%;">
         
         <td style="width: 4%; font-size:20px;" align="center"><a href="index.php" style="text-align: right;">
         <a href="首頁.php">首頁</a></td>
-        <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>      
+        <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" 
+        value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  
+        style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
+        <td align="center" style="width:4%; font-size:19px;"><a href="car.php">購物車</a></td>
         <td align="center" style="width:4%; font-size:20px;"><a href="會員登入.php">登入</a></td>
         <td align="center" style="width:4%; font-size:20px;"><a href="註冊.php">註冊</a></td>
-    </tr>
-        </table>
-        </div></div>
-</div></div>
-    
-    <div class="container">
 
-        <?php
+    </tr>
+</table>
+</div></div>
+
+    <div class="container">
+    <?php
             $count=4;
             include("db.php");
 
-            $sql = "SELECT * FROM `aa` WHERE pt_id = '4'";
-
+            $sql = "SELECT * FROM `pro_type` WHERE 1";
             $result = mysqli_query($link, $sql);
             if(mysqli_num_rows($result)>0){
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -100,30 +109,35 @@ header {
                         echo "<br>";
                     }
                     echo "<div class='product'>
-                        <img src='" . $row["c_img"] . "'>
-                        <h3>" . $row["c_name"] . "</h3>
-                        <h4>" . $row["c_text"] . "</h4>
-                        <h4>價錢:$" . $row["c_money"] . "</h4>
+                     
+                       <h3><a href='" . $row["pt_path"] . ".php'>" . $row["pt_name"] . "</a></h3>
+
+                        <h4>" . $row["pt_comment"] . "</h4>
+                     
                         <div style='text-align: left;'>
-                        <form action='刪除商品.php' method='POST' onsubmit='return confirm(\"確定要刪除這個商品嗎？\");'>
-                            <input type='hidden' name='c_id' value='" . $row['c_id'] . "'>
-                            <button type='submit' >刪除商品</button>
+                        <form action='刪除種類.php' method='POST' onsubmit='return confirm(\"確定要刪除這個商品嗎？\");'>
+                            <input type='hidden' name='pt_id' value='" . $row['pt_id'] . "'>
+                            <button type='submit'>刪除商品種類</button>
                         </form>
-                            </div>
-                       <div style='text-align: right;'>
-                        <a href='修改商品.php?c_id=" . $row['c_id'] . "'>修改商品</a>
                         </div>
-                        </div>";
+                       
+                    <div >    
+                    </div>
+</div>";
+
                     $count++;
                    
                 }
             }
         ?>
- 
+
+       <?php
+      
+
+       ?> 
     </div>
-<div style="position: absolute; bottom: 0; right: 0;">
-    <a href="新增商品.php">新增商品</a>
-    <br>
+
+ 
 </div>
 </body>
 </html>

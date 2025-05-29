@@ -91,7 +91,7 @@ header {
             $count=4;
             include("db.php");
 
-            $sql = "SELECT * FROM `aa` WHERE pt_id = '4'";
+            $sql = "SELECT * FROM `aa` WHERE pt_id = '5'";
 
             $result = mysqli_query($link, $sql);
             if(mysqli_num_rows($result)>0){

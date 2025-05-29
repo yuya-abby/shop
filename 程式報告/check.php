@@ -1,161 +1,181 @@
+<?php
+include "db.php";
+$account = $_SESSION["account"];
+$sql = "SELECT * FROM countmoney WHERE account = '$account' ORDER BY order_date DESC LIMIT 10";
+$res = mysqli_query($link, $sql);
+?>
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<?php 
-include "db.php"; 
+    <meta charset="UTF-8">
+    <title>噜噜咪賣貨便</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: rgb(255, 255, 255);
+            padding: 20px;
+        }
 
-?>
-<meta charset="UTF-8">
-<title>噜噜咪賣貨便</title>
-<style>
-    body {
-        background-color: rgb(255, 255, 255);
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-    header {
-        background-color: rgb(255, 236, 215);
-        text-align: center;
-        padding: 20px;
-    }
-    header img {
-        height: 150px;
-    }
-    .banner {
-        background: rgb(255, 244, 180);
-        padding: 10px;
-        text-align: right;
-    }
-    .navbar table {
-        width: 100%;
-    }
-    .navbar td {
-        font-size: 18px;
-        text-align: center;
-        padding: 5px;
-    }
-    .navbar a {
-        color: black;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .container {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 20px;
-    }
-    h3 {
-        text-align: center;
-        margin-top: 40px;
-    }
-    .product-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 30px 0;
-    }
-    .product-table th, .product-table td {
-        border: 1px solid #ddd;
-        padding: 12px;
-        text-align: center;
-    }
-    .product-table th {
-        background-color: #f9f9f9;
-    }
-    .info-table {
-        margin: 0 auto 30px;
-        width: 100%;
-        max-width: 500px;
-    }
-    .info-table td {
-        padding: 10px;
-        border-bottom: 1px solid #ccc;
-    }
-    .submit-btn {
-        background-color: #ff6600;
-        color: white;
-        padding: 12px 24px;
-        border: none;
-        border-radius: 6px;
-        font-size: 16px;
-        cursor: pointer;
-        display: block;
-        margin: 30px auto;
-    }
-</style>
+        header {
+            background-color: rgb(255, 236, 215);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        header img {
+            height: 200px;
+        }
+
+        .banner {
+            background: rgb(255, 244, 180);
+            text-align: right;
+            padding: 8px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .navbar table {
+            width: 100%;
+        }
+
+        .navbar td {
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f9d493;
+        }
+
+        .btn-complete {
+            background-color: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-complete:hover {
+            background-color: #218838;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        input[type="text"] {
+            font-size: 16px;
+            padding: 5px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 <body>
 
 <header>
-    <img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
+    <img src="img/嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 
 <div class="banner">
     <div class="navbar">
-        <table>
-            <tr>
-                <td><a href="index-after.php">首頁</a></td>
-                <td><a href="msg-after2.php">留言板</a></td>
-                <td><a href="login.php">登出</a></td>
-            </tr>
-        </table>
+        <form method="GET" action="search.php">
+            <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="width: 200px; text-align: center;"><a href="index-after.php">首頁</a></td>
+                    <td style="text-align: right;">
+                        <input type="text" name="keyword" placeholder="輸入商品名稱搜尋" 
+                               value="<?php echo isset($_GET['keyword']) ? htmlspecialchars($_GET['keyword']) : ''; ?>" 
+                               style="width:200px;">
+                        <button type="submit">搜尋🔍</button>
+                    </td>
+                    <td style="width: 100px; text-align: center;"><a href="car.php">購物車</a></td>
+                    <td style="width: 100px; text-align: center;"><a href="msg-after2.php">留言板</a></td>
+                    <td style="width: 100px; text-align: center;"><a href="login.php">登出</a></td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
 
-<div class="container">
-    <h3>購物明細</h3>
-    <table class="product-table">
-        <tr>
-            <th>商品名稱</th>
-            <th>數量</th>
-            <th>總計</th>
-            <th>付款方式</th>
-        </tr>
-        <?php
-        $c_name=$_SESSION["c_name"];
-        $sql = "SELECT * FROM `countmoney` WHERE `c_name` = '$c_name'";
-        $res = mysqli_query($link, $sql);
-        if (mysqli_num_rows($res) > 0) {
-            while ($row = mysqli_fetch_assoc($res)) {
-                echo "<tr>";
-                echo "<td>" . $row["c_name"] . "</td>";
-                echo "<td>" . $row["quantitiy"] . "</td>";
-                echo "<td>" . $row["subtotal"] . "</td>";
-                echo "<td>" . $row["payment_method"] . "</td>";
-                echo "</tr>";
+<h1>您的訂單明細</h1>
+
+<table>
+    <tr>
+        <th>商品圖片</th>
+        <th>名稱</th>
+        <th>單價</th>
+        <th>數量</th>
+        <th>總價</th>
+        <th>付款方式</th>
+        <th>訂購時間</th>
+        <th>帳號</th>
+        <th>狀態</th>
+        <th>操作</th>
+    </tr>
+    <?php
+    if (mysqli_num_rows($res) > 0) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            echo "<tr>
+                    <td><img src='{$row['img']}' height='100'></td>
+                    <td>{$row['c_name']}</td>
+                    <td>NT$ {$row['price']}</td>
+                    <td>{$row['quantity']}</td>
+                    <td>NT$ {$row['subtotal']}</td>
+                    <td>{$row['payment_method']}</td>
+                    <td>{$row['order_date']}</td>
+                    <td>{$row['account']}</td>
+                    <td>{$row['status']}</td>
+                    <td>";
+            if ($row['status'] !== '已完成') {
+                echo "<form action='check2.php' method='POST' style='margin:0;'>
+                        <input type='hidden' name='order_id' value='{$row['id']}'>
+                        <input type='submit' class='btn-complete' value='完成訂單'>
+                      </form>";
+            } else {
+                echo "—";
             }
-        } else {
-            echo "<tr><td colspan='4'>尚無訂單資料</td></tr>";
+            echo "</td></tr>";
         }
-        ?>
-    </table>
+    } else {
+        echo "<tr><td colspan='10'>尚無訂單紀錄。</td></tr>";
+    }
+    ?>
+</table>
 
-    <h3>購買人資訊</h3>
-    <table class="info-table">
-        <?php
-        if (isset($_SESSION["account"])) {
-            $account = $_SESSION["account"];
-            $sql = "SELECT * FROM `user` WHERE `account` = '$account'";
-            $res = mysqli_query($link, $sql);
-
-            if (mysqli_num_rows($res) > 0) {
-                while ($row = mysqli_fetch_assoc($res)) {
-                    echo "<tr><td>帳號：{$row["account"]}</td></tr>";
-                    echo "<tr><td>姓名：{$row["name"]}</td></tr>";
-                    echo "<tr><td>電話：{$row["phone"]}</td></tr>";
-                    echo "<tr><td>Email：{$row["email"]}</td></tr>";
-                }
-            }
-        } else {
-            echo "<tr><td>尚未登入，無法顯示使用者資訊。</td></tr>";
-        }
-        ?>
-    </table>
-
-    <form action="order-complete.php" method="post">
-        <input class="submit-btn" type="submit" value="完成訂單">
-    </form>
-</div>
 
 </body>
 </html>

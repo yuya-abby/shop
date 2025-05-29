@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2025-05-27 04:33:54
+-- 產生時間： 2025-05-29 04:58:29
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.0.30
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- 資料庫： `shop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `aa`
+--
+
+CREATE TABLE `aa` (
+  `c_id` int(11) NOT NULL,
+  `c_name` text NOT NULL,
+  `c_text` text NOT NULL,
+  `c_money` int(50) NOT NULL,
+  `c_img` text NOT NULL,
+  `pt_id` int(11) NOT NULL,
+  `pt_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -74,8 +90,21 @@ CREATE TABLE `car` (
   `addproduct_name` varchar(20) NOT NULL,
   `addproduct_money` int(11) NOT NULL,
   `addproduct_count` int(11) NOT NULL,
-  `addproduct_img` text NOT NULL
+  `addproduct_img` text NOT NULL,
+  `acc` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 傾印資料表的資料 `car`
+--
+
+INSERT INTO `car` (`id`, `addproduct_id`, `addproduct_name`, `addproduct_money`, `addproduct_count`, `addproduct_img`, `acc`) VALUES
+(1, 7, '手機殼3', 199, 1, 'img/手機殼3.jpg', 'aaaa'),
+(2, 7, '手機殼3', 398, 2, 'img/手機殼3.jpg', 'aaaa'),
+(3, 19, '男裝3', 599, 1, 'img/衣服男3.jpg', 'aaaa'),
+(4, 18, '男裝2', 599, 1, 'img/衣服男2.jpg', 'aaaa'),
+(5, 7, '手機殼3', 199, 1, 'img/手機殼3.jpg', 'aaaa'),
+(6, 16, '女裝4', 599, 1, 'img/衣服女4.jpg', 'aaaa');
 
 -- --------------------------------------------------------
 
@@ -94,26 +123,21 @@ CREATE TABLE `countmoney` (
   `price` decimal(10,2) NOT NULL,
   `subtotal` decimal(10,2) NOT NULL,
   `payment_method` varchar(50) NOT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `status` varchar(20) DEFAULT '處理中'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 傾印資料表的資料 `countmoney`
 --
 
-INSERT INTO `countmoney` (`id`, `account`, `c_id`, `img`, `quantity`, `total`, `c_name`, `price`, `subtotal`, `payment_method`, `order_date`) VALUES
-(109, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 08:04:12'),
-(110, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 08:07:02'),
-(111, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 08:07:27'),
-(112, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 08:12:15'),
-(113, 'aaaa', 14, '.', 1, 0.00, '女裝2', 599.00, 599.00, 'atm', '2025-05-26 08:48:03'),
-(114, 'aaaa', 14, '.', 1, 0.00, '女裝2', 599.00, 599.00, 'atm', '2025-05-26 08:48:03'),
-(115, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 11:04:22'),
-(116, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 11:04:25'),
-(117, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 11:04:31'),
-(118, 'aaaa', 20, '', 1, 0.00, '男裝4', 599.00, 599.00, 'atm', '2025-05-26 11:04:40'),
-(119, 'aaaa', 19, '', 1, 0.00, '男裝3', 599.00, 599.00, 'atm', '2025-05-27 02:19:59'),
-(120, 'aaaa', 19, '', 1, 0.00, '男裝3', 599.00, 599.00, 'atm', '2025-05-27 02:24:37');
+INSERT INTO `countmoney` (`id`, `account`, `c_id`, `img`, `quantity`, `total`, `c_name`, `price`, `subtotal`, `payment_method`, `order_date`, `status`) VALUES
+(136, 'aaaa', 7, 'img/手機殼3.jpg', 2, 0.00, '手機殼3', 199.00, 398.00, 'cod', '2025-05-28 14:33:15', '處理中'),
+(137, 'aaaa', 7, 'img/手機殼3.jpg', 2, 0.00, '手機殼3', 199.00, 398.00, 'atm', '2025-05-28 14:34:02', '處理中'),
+(138, 'aaaa', 7, 'img/手機殼3.jpg', 1, 0.00, '手機殼3', 199.00, 199.00, 'cod', '2025-05-28 15:24:02', '已完成'),
+(139, 'aaaa', 7, 'img/手機殼3.jpg', 1, 0.00, '手機殼3', 199.00, 199.00, 'ATM轉帳', '2025-05-28 14:54:07', '已完成'),
+(140, 'aaaa', 7, 'img/手機殼3.jpg', 2, 0.00, '手機殼3', 199.00, 398.00, 'ATM轉帳', '2025-05-28 15:23:54', '處理中'),
+(141, 'aaaa', 15, 'img/衣服女3.jpg', 1, 0.00, '女裝3', 599.00, 599.00, '貨到付款', '2025-05-28 15:24:17', '處理中');
 
 -- --------------------------------------------------------
 
@@ -152,6 +176,20 @@ INSERT INTO `msg` (`id`, `account`, `title`, `text`, `img`, `add_time`, `up_time
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `pro_type`
+--
+
+CREATE TABLE `pro_type` (
+  `img` text NOT NULL,
+  `pt_path` text NOT NULL,
+  `pt_id` int(11) NOT NULL,
+  `pt_name` varchar(50) NOT NULL,
+  `pt_comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `user`
 --
 
@@ -170,15 +208,22 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `account`, `password`, `name`, `email`, `phone`, `type`) VALUES
-(6, 'bbb', '123', '賣家', 'hfdhgf@gmail.com', 'afds', 'o'),
+(6, 'bba', '123', '賣家', 'hfdhgf@gmail.com', 'afds', 'o'),
 (7, 'admin', '123', '管理員', 'asdfas@gmail.com', 'adsffdas', 'a'),
 (8, 'bbb', '123', 'abc', '112534@gmail.com', 'svdcvc', 'u'),
 (10, 'aaaa', '123', 'aaa', 'a0918381246@gmail.com', 'sdfasda', 'u'),
-(11, '12', '123', 'bbg', '112534@gmail.com', 'adsffdas', 'u');
+(11, '12', '123', 'bbg', '112534@gmail.com', 'adsffdas', 'u'),
+(21, 'sdf', '123', 'sdaf', 'aaa@gmail.com', 'sdaff', 'u');
 
 --
 -- 已傾印資料表的索引
 --
+
+--
+-- 資料表索引 `aa`
+--
+ALTER TABLE `aa`
+  ADD PRIMARY KEY (`c_id`);
 
 --
 -- 資料表索引 `addproduct`
@@ -205,6 +250,12 @@ ALTER TABLE `msg`
   ADD PRIMARY KEY (`id`);
 
 --
+-- 資料表索引 `pro_type`
+--
+ALTER TABLE `pro_type`
+  ADD PRIMARY KEY (`pt_id`);
+
+--
 -- 資料表索引 `user`
 --
 ALTER TABLE `user`
@@ -213,6 +264,12 @@ ALTER TABLE `user`
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `aa`
+--
+ALTER TABLE `aa`
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `addproduct`
@@ -224,13 +281,13 @@ ALTER TABLE `addproduct`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `car`
 --
 ALTER TABLE `car`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `countmoney`
 --
 ALTER TABLE `countmoney`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `msg`
@@ -242,7 +299,7 @@ ALTER TABLE `msg`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
