@@ -107,71 +107,73 @@
     </div>
 </div>
 
-<h1>結帳資訊</h1>
 
 <div class="container">
-    <form action="count2.php" method="POST">
+    <form action="check.php" method="POST">
         <div class="product-section">
             <?php
-                $id = $_GET['id'];
-                $sql = "SELECT * FROM `addproduct` WHERE `id` = '$id'";
-                $res = mysqli_query($link, $sql);
-                
-                if (mysqli_num_rows($res) > 0) {
-                    while ($row = mysqli_fetch_assoc($res)) {
-                        $price = $row['money'];
-                        echo "
-                            <img src='{$row['img']}' height='200' width='200'><br>
-                            <h2>價錢：NT$ {$price}</h2>
-                            <p style='font-size: 20px;'>
-                                購買數量：
-                                <input type='number' name='quantity' min='1' value='1'
-                                       oninput=\"updateTotal(this, {$price}, {$row['id']})\">
-                            </p>
-                            <h3>總價：NT$ <span id='total-{$row['id']}'>{$price}</span></h3>
-                            <input type='hidden' name='id' value='{$row['id']}'>
-                            <table class='info-table'>
-                                <tr>
-                                    <td>付款方式：</td>
-                                    <td>
-                                        <select name='payment'>
-                                            <option value='ATM轉帳'>ATM轉帳</option>
-                                            <option value='貨到付款'>貨到付款</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </table>
-                        ";
-                    }
-                } else {
-                    echo "<p>查無商品</p>";
-                }
+
+            // 檢查是否有選擇商品
+            if (!isset($_POST['selected_items'])) {
+                echo "<h3>請至少選擇一項商品來結帳。</h3>";
+                exit;
+            }
+
+            $selected_ids = $_POST['selected_items'];
+
+            // 安全處理 ID 陣列
+            $id_list = implode(",", array_map('intval', $selected_ids));
+
+            // 查詢勾選商品資料
+            $sql = "SELECT * FROM car WHERE id IN ($id_list)";
+            $res = mysqli_query($link, $sql);
+
+            // 顯示訂單內容
+            echo "<h2 align='center'>訂單明細</h2>";
+            echo "<table border='1' cellspacing='0' cellpadding='10' align='center'>";
+            echo "<tr>
+                    <th>圖片</th>
+                    <th>商品名稱</th>
+                    <th>數量</th>
+                    <th>單價</th>
+                    <th>小計</th>
+                </tr>";
+
+            $total = 0;
+
+            while ($row = mysqli_fetch_assoc($res)) {
+                $name = $row['addproduct_name'];
+                $count = $row['addproduct_count'];
+                $price = $row['addproduct_money'] / $count; // 反推出單價
+                $subtotal = $row['addproduct_money'];
+                $img = $row['addproduct_img'];
+
+                echo "<tr>
+                        <td><img src='$img' width='100'></td>
+                        <td>$name</td>
+                        <td>$count</td>
+                        <td>NT$ $price</td>
+                        <td>NT$ $subtotal</td>
+                    </tr>";
+
+                $total += $subtotal;
+            }
+
+            echo "<tr>
+                    <td colspan='4' align='right'><strong>總金額：</strong></td>
+                    <td><strong>NT$ $total</strong></td>
+                </tr>";
+
+            echo "</table>";
             ?>
+
         </div>
 
-        <h3>購買人資訊</h3>
-        <table class="info-table">
-            <?php
-                $account = $_SESSION["account"];
-                $sql = "SELECT * FROM `user` WHERE `account` = '$account'";
-                $res = mysqli_query($link, $sql);
-
-                if (mysqli_num_rows($res) > 0) {
-                    while ($row = mysqli_fetch_assoc($res)) {
-                        echo "<tr><td>帳號：</td><td>{$row['account']}</td></tr>";
-                        echo "<tr><td>姓名：</td><td>{$row['name']}</td></tr>";
-                        echo "<tr><td>電話：</td><td>{$row['phone']}</td></tr>";
-                        echo "<tr><td>Email：</td><td>{$row['email']}</td></tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='2'>無法取得使用者資訊</td></tr>";
-                }
-            ?>
-        </table>
+       
 
         <br>
-        <input class="submit-btn" type="submit" value="確認結帳">
-    </form>
+    <input class="submit-btn" type="submit" value="直接結帳">
+</form>
 </div>
 
 <script>

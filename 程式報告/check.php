@@ -112,7 +112,7 @@ $res = mysqli_query($link, $sql);
 
 <div class="banner">
     <div class="navbar">
-        <form method="GET" action="search.php">
+        <form method="GET" action=".php">
             <table cellspacing="0" cellpadding="0">
                 <tr>
                     <td style="width: 200px; text-align: center;"><a href="index-after.php">首頁</a></td>
@@ -132,7 +132,6 @@ $res = mysqli_query($link, $sql);
 </div>
 
 <h1>您的訂單明細</h1>
-
 <table>
     <tr>
         <th>商品圖片</th>

@@ -160,7 +160,7 @@
         </table>
         </div></div>
         
-<h1 align="center">編輯帳號、權限</h1>
+<h1 align="center">管理商品</h1>
 <table align="center" border="1" style="width:700px">
         <tr align="center">
             <td>流水號</td>
@@ -174,19 +174,18 @@
         </tr>
         <?php
 
-        $sql="SELECT * FROM `user` WHERE 1";
+        $sql="SELECT * FROM `addproduct` WHERE 1";
         $res=mysqli_query($link,$sql);
         if(mysqli_num_rows($res)>0){
             while($row=mysqli_fetch_assoc($res)){
                 
                     echo "<tr align='center'>";
                     echo "<td>".$row["id"]."</td>";
-                    echo "<td>".$row["account"]."</td>";
-                    echo "<td>".$row["password"]."</td>";
+                    echo "<td>".$row["img"]."</td>";
+                    echo "<td>".$row["money"]."</td>";
+                    echo "<td>".$row["category"]."</td>";
                     echo "<td>".$row["name"]."</td>";
-                    echo "<td>".$row["phone"]."</td>";
-                    echo "<td>".$row["email"]."</td>";
-                    echo "<td>".$row["type"]."</td>";
+                    echo "<td>".$row["c_name"]."</td>";
                     echo "<td><input type='button' value='修改(權限)'onclick=location.href='up.php?id=".$row['id']."'>
                     <input type='button' value='刪除' onclick=location.href='del2.php?id=".$row["id"]."'></td>";
                      echo "</tr>";

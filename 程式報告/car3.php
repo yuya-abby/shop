@@ -4,7 +4,7 @@
     <?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>噜噜咪賣貨便</title>
     <style>
         body {
 
@@ -122,6 +122,9 @@
             border: none;
             font-size: 18px;
         }
+        a{
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -132,10 +135,9 @@
         <table cellspacing="0" cellpadding="0" style="width:100%;">
             <tr>
             <form action="" method="get">
-                <td style="width: 200px; font-size:20px;" align="center"><a href="index.php">首頁</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="msg2.php">留言板</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="index-after.php">首頁</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="msg-after2.php">留言板</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="add-user.php">註冊</a></td>
             </form>
             </tr>
         </table>
@@ -151,7 +153,7 @@
                         while($row=mysqli_fetch_assoc($res)){
                             echo "<br><img src='".$row['img']."' height='350px'><br>
                             <h2>價錢：".$row['money']."</h2>
-                            <p style='font-size: 20px;'>購買數量：<input type='number' name='buy_count' style='height: 25px; width: 200px;' min='0'></p>
+                            <p style='font-size: 20px;'>購買數量：<input type='number' name='buy_count' min='1' value='1' style='height: 25px; width: 200px;' min='0'></p>
                             <input type='hidden' name='id' value='".$row['id']."'>
                             <input type='submit' value='加入購物車'>　<input type='button' value='取消' onclick=location.href='buy.php'><br>
                             <p>　</p>";

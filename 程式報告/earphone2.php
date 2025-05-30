@@ -112,7 +112,7 @@ if (mysqli_num_rows($res) > 0) {
         echo "<p>價格：$" . $row['money'] . "</p>";
         // 購買按鈕，會把分類與價格送到 count.php
         echo "<button class='button' onclick=location.href='car3.php?id=".$row["id"]."'>加入購物車</button>";
-        echo "<button class='button' onclick=location.href='count.php?id=".$row["id"]."'>立即購買</button>";
+        echo "<button class='button' onclick=location.href='count-a.php?id=".$row["id"]."'>立即購買</button>";
         
         echo "</div>";
     }
