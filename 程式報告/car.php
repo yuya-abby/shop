@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
@@ -101,6 +100,16 @@
             text-decoration: none;
         }
     </style>
+    <?php 
+        include "db.php"; 
+        if (isset($_GET['delete'])) {
+            $delete_id = intval($_GET['delete']);
+            $delete_sql = "DELETE FROM car WHERE id = $delete_id";
+            mysqli_query($link, $delete_sql);
+            header("location: " . strtok($_SERVER["REQUEST_URI"], '?'));
+            exit;
+        }
+    ?>
 </head>
 <body>
     <header>
@@ -112,15 +121,16 @@
             <form action="" method="get">
                 <table cellspacing="0" cellpadding="0" style="width:100%;">
                     <tr>
-                        <td style="width: 200px; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
+                        <td style="width: 10%; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
                         <td align="right">
                             <input type="text" name="keyword" placeholder="輸入商品名稱搜尋"
                                 value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"
                                 style="width:200px; font-size:18px;">
                             <button type="submit" style="width:100px; font-size:18px;">搜尋🔍</button>
                         </td>
-                        <td align="center" style="width:100px; font-size:20px;"><a href="msg-after2.php">留言板</a></td>
-                        <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
+                        <td align="center" style="width:10%; font-size:20px;"><a href="check.php">購買清單</a></td>
+                        <td align="center" style="width:10%; font-size:20px;"><a href="msg-after2.php">留言板</a></td>
+                        <td align="center" style="width:10%; font-size:20px;"><a href="login.php">登出</a></td>
                     </tr>
                 </table>
             </form>
@@ -137,8 +147,8 @@
                 <th>商品名稱</th>
                 <th>數量</th>
                 <th>小計</th>
+                <th>操作</th>
             </tr>
-
 
             <?php
             $sql = "SELECT * FROM car WHERE 1 ORDER BY id DESC";
@@ -155,9 +165,10 @@
                     echo "<tr>";
                     echo "<td><input type='checkbox' name='selected_items[]' value='" . $row['id'] . "'></td>";
                     echo "<td><img src='" . $row['addproduct_img'] . "' width='100px'></td>";
-                    echo "<td>" . $row['addproduct_name'] . "</td>";
+                    echo "<td>" . htmlspecialchars($row['addproduct_name']) . "</td>";
                     echo "<td>" . $row['addproduct_count'] . "</td>";
                     echo "<td>$" . $row['addproduct_money'] . "</td>";
+                    echo "<td><a href='?delete=" . $row['id'] . "' onclick='return confirm(\"確定要刪除這個商品嗎？\")' class='button' style='background:#cc0000;'>刪除</a></td>";
                     echo "</tr>";
                 }
             }
@@ -171,13 +182,13 @@
             <button type="button" onclick="toggleSelectAll()" class="button">全選 / 全不選</button>
         </div>
     </form>
+
     <script>
     function toggleSelectAll() {
         const checkboxes = document.querySelectorAll('input[name="selected_items[]"]');
         const allChecked = Array.from(checkboxes).every(cb => cb.checked);
-
         checkboxes.forEach(cb => cb.checked = !allChecked);
     }
-</script>
+    </script>
 </body>
 </html>

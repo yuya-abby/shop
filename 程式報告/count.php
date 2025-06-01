@@ -59,11 +59,6 @@
             margin-bottom: 30px;
         }
 
-        .product-section input[type="number"] {
-            width: 100px;
-            padding: 5px;
-        }
-
         .info-table {
             margin: 0 auto 20px;
             border-collapse: collapse;
@@ -81,6 +76,11 @@
             cursor: pointer;
             border: none;
             font-size: 16px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            width: 300px;
         }
 
         a {
@@ -107,11 +107,23 @@
     </div>
 </div>
 
-
 <div class="container">
     <form action="check.php" method="POST">
         <div class="product-section">
             <?php
+            // 使用者登入檢查
+            if (!isset($_SESSION['account'])) {
+                echo "<h3>請先登入。</h3>";
+                exit;
+            }
+
+            $account = $_SESSION['account'];
+
+            // 抓使用者姓名
+            $user_query = "SELECT name FROM user WHERE account = '$account'";
+            $user_result = mysqli_query($link, $user_query);
+            $user_data = mysqli_fetch_assoc($user_result);
+            $name = $user_data['name'] ?? '未知使用者';
 
             // 檢查是否有選擇商品
             if (!isset($_POST['selected_items'])) {
@@ -120,15 +132,12 @@
             }
 
             $selected_ids = $_POST['selected_items'];
-
-            // 安全處理 ID 陣列
             $id_list = implode(",", array_map('intval', $selected_ids));
 
-            // 查詢勾選商品資料
+            // 查詢商品資料
             $sql = "SELECT * FROM car WHERE id IN ($id_list)";
             $res = mysqli_query($link, $sql);
 
-            // 顯示訂單內容
             echo "<h2 align='center'>訂單明細</h2>";
             echo "<table border='1' cellspacing='0' cellpadding='10' align='center'>";
             echo "<tr>
@@ -142,15 +151,15 @@
             $total = 0;
 
             while ($row = mysqli_fetch_assoc($res)) {
-                $name = $row['addproduct_name'];
+                $name_p = $row['addproduct_name'];
                 $count = $row['addproduct_count'];
-                $price = $row['addproduct_money'] / $count; // 反推出單價
+                $price = $row['addproduct_money'] / $count;
                 $subtotal = $row['addproduct_money'];
                 $img = $row['addproduct_img'];
 
                 echo "<tr>
                         <td><img src='$img' width='100'></td>
-                        <td>$name</td>
+                        <td>$name_p</td>
                         <td>$count</td>
                         <td>NT$ $price</td>
                         <td>NT$ $subtotal</td>
@@ -163,26 +172,40 @@
                     <td colspan='4' align='right'><strong>總金額：</strong></td>
                     <td><strong>NT$ $total</strong></td>
                 </tr>";
-
             echo "</table>";
-            ?>
 
+            // 隱藏傳遞選擇的商品 ID
+            foreach ($selected_ids as $sid) {
+                echo "<input type='hidden' name='selected_items[]' value='$sid'>";
+            }
+            ?>
         </div>
 
-       
+        <br><br>
+
+        <!-- 使用者資訊與付款、地址 -->
+        <table class='info-table'>
+            <tr><td><strong>帳號：</strong></td><td><?php echo $account; ?></td></tr>
+            <tr><td><strong>姓名：</strong></td><td><?php echo $name; ?></td></tr>
+            <tr>
+                <td><strong>付款方式：</strong></td>
+                <td>
+                    <select name="payment" required>
+                        <option value="">請選擇</option>
+                        <option value="cod">貨到付款</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>寄送地址：</strong></td>
+                <td><input type="text" name="address" required></td>
+            </tr>
+        </table>
 
         <br>
-    <input class="submit-btn" type="submit" value="直接結帳">
-</form>
+        <input class="submit-btn" type="submit" value="直接結帳">
+    </form>
 </div>
-
-<script>
-    function updateTotal(element, price, id) {
-        const quantity = parseInt(element.value) || 0;
-        const total = (price * quantity).toFixed(0);
-        document.getElementById(`total-${id}`).innerText = total;
-    }
-</script>
 
 </body>
 </html>

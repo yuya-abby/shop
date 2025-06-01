@@ -92,14 +92,8 @@
             </tr>
         </table>
         </div></div>
-<h1 align="center">訂單完成</h1>
-    <table align="center">
-        
-        <tr>
-            <td></td>
-            <td align="center"><a href="#" class="button" onclick="location.href='index-after.php'">回首頁</a></td>
-        </tr>
-    </table>
-
+<h1>✅ 訂單已成功提交！</h1>
+    <p>感謝您的訂購，我們會盡快處理。</p>
+    <a href="index-after.php">返回首頁</a>
 </body>
 </html>

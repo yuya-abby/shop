@@ -155,7 +155,7 @@
                             <h2>價錢：".$row['money']."</h2>
                             <p style='font-size: 20px;'>購買數量：<input type='number' name='buy_count' min='1' value='1' style='height: 25px; width: 200px;' min='0'></p>
                             <input type='hidden' name='id' value='".$row['id']."'>
-                            <input type='submit' value='加入購物車'>　<input type='button' value='取消' onclick=location.href='buy.php'><br>
+                            <input type='submit' value='加入購物車'>　<input type='button' value='取消' onclick=location.href='".$row['c_name']."2.php'><br>
                             <p>　</p>";
                         }
                     }
