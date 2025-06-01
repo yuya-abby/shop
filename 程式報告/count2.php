@@ -27,13 +27,13 @@ if ($row = mysqli_fetch_assoc($result)) {
     $price = (int)$row['money'];
     $subtotal = $price * $quantity;
 
-    $insert_sql = "INSERT INTO `countmoney` 
-        (`account`, `c_id`, `img`, `quantity`, `c_name`, `price`, `subtotal`, `payment_method`, `order_date`, `address`) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
+    $insert_sql = "INSERT INTO `countmoney2` 
+        (`id`, `c_name`, `price`, `quantity`, `subtotal`, `img`, `order_date`, `account`, `payment_method`, `status`, `address`) 
+        VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?)";
 
     $insert_stmt = mysqli_prepare($link, $insert_sql);
     mysqli_stmt_bind_param($insert_stmt, "sisssiiss", 
-        $account, $id, $img, $quantity, $name, $price, $subtotal, $payment_method, $address
+        $id, $c_name, $price, $quantity, $subtotal, $img, $account, $payment_method, $address
     );
 
     if (mysqli_stmt_execute($insert_stmt)) {

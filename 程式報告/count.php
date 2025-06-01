@@ -192,7 +192,7 @@
                 <td>
                     <select name="payment" required>
                         <option value="">請選擇</option>
-                        <option value="cod">貨到付款</option>
+                        <option value="貨到付款">貨到付款</option>
                     </select>
                 </td>
             </tr>
