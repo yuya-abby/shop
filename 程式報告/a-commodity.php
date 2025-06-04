@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
@@ -74,6 +73,8 @@
         }
         a{
             text-decoration: none;
+            font-size: 18px;
+            color:black;
         }
 
         .menu-toggle {
@@ -121,6 +122,23 @@
             display: block;
             line-height: 1.6;
         }
+         .menu-toggle {
+             z-index: 1100; /* 比側邊選單高就好 */
+        }
+        
+        .menu-item a {
+            color:rgb(227, 227, 227);
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+             text-decoration: none;
+        }
+
+        .menu-item a:hover {
+            color:rgb(216, 219, 223);
+            text-decoration: underline;
+}
+   
     </style>
 </head>
 <body>
@@ -137,13 +155,24 @@
 
 <!-- 側邊分類選單 -->
 <div id="categoryMenu" class="category-menu">
-    <div class="category-item"><a href="index.php">首頁</a></div>
-    <div class="category-item"><a href="shirt-girl.php">衣服(女)</a></div>
-    <div class="category-item"><a href="shirt-boy.php">衣服(男)</a></div>
-    <div class="category-item"><a href="phone.php">手機殼</a></div>
-    <div class="category-item"><a href="lipstick.php">口紅</a></div>
-    <div class="category-item"><a href="a-msg.php">新增總類</a></div>
+    <div class="category-list">
+        <?php
+        include("db.php"); // 確保你有連接資料庫
+
+        $sql = "SELECT * FROM `pro_type`";
+        $result = mysqli_query($link, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='menu-item'>";
+                echo "<a href='女裝.php?pt_id=" . $row["pt_id"] . "'>" . htmlspecialchars($row["pt_name"]) . "</a>";
+                echo "</div>";
+            }
+        }
+        ?>
+    </div>
 </div>
+
 
     </style>
 </head>
@@ -153,41 +182,42 @@
 
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
+                <td align="center" style="width:100px; font-size:20px;"><a href="admin.php">編輯帳號、權限</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">管理留言板</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">管理商品</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-type.php">新增種類</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>
         </div></div>
         
 <h1 align="center">管理商品</h1>
-<table align="center" border="1" style="width:700px">
+<table align="center" border="1" style="width:800px">
         <tr align="center">
             <td>流水號</td>
-            <td>帳號</td>
-            <td>密碼</td>
-            <td>姓名</td>
-            <td>電話</td>
-            <td>Email</td>
-            <td>權限</td>
-            <td>編輯</td>
+            <td>商品名稱</td>
+            <td>商品說明</td>
+            <td>商品價錢</td>
+            <td>圖片</td>
+            <td>總類流水號</td>
+            <td>總類名稱</td>
         </tr>
         <?php
 
-        $sql="SELECT * FROM `addproduct` WHERE 1";
+        $sql="SELECT * FROM `aa` WHERE 1";
         $res=mysqli_query($link,$sql);
         if(mysqli_num_rows($res)>0){
             while($row=mysqli_fetch_assoc($res)){
                 
                     echo "<tr align='center'>";
-                    echo "<td>".$row["id"]."</td>";
-                    echo "<td>".$row["img"]."</td>";
-                    echo "<td>".$row["money"]."</td>";
-                    echo "<td>".$row["category"]."</td>";
-                    echo "<td>".$row["name"]."</td>";
+                    echo "<td>".$row["c_id"]."</td>";
                     echo "<td>".$row["c_name"]."</td>";
-                    echo "<td><input type='button' value='修改(權限)'onclick=location.href='up.php?id=".$row['id']."'>
-                    <input type='button' value='刪除' onclick=location.href='del2.php?id=".$row["id"]."'></td>";
+                    echo "<td>".$row["c_text"]."</td>";
+                    echo "<td>".$row["c_money"]."</td>";
+                    echo "<td>".$row["c_img"]."</td>";
+                    echo "<td>".$row["pt_id"]."</td>";
+                    echo "<td>".$row["pt_name"]."</td>";
+                    echo "<td><input type='button' value='修改(權限)'onclick=location.href='up.php?id=".$row['c_id']."'>
+                    <input type='button' value='刪除' onclick=location.href='del5.php?id=".$row["c_id"]."'></td>";
                      echo "</tr>";
                 
                 }

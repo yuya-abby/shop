@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "db.php"; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
@@ -74,6 +73,8 @@
         }
         a{
             text-decoration: none;
+            font-size: 18px;
+            color:black;
         }
 
         .menu-toggle {
@@ -121,6 +122,22 @@
             display: block;
             line-height: 1.6;
         }
+        .menu-toggle {
+             z-index: 1100; /* 比側邊選單高就好 */
+        }
+
+       .menu-item a {
+            color:rgb(227, 227, 227);
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .menu-item a:hover {
+            color:rgb(216, 219, 223);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -137,12 +154,22 @@
 
 <!-- 側邊分類選單 -->
 <div id="categoryMenu" class="category-menu">
-    <div class="category-item"><a href="index.php">首頁</a></div>
-    <div class="category-item"><a href="shirt-girl.php">衣服(女)</a></div>
-    <div class="category-item"><a href="shirt-boy.php">衣服(男)</a></div>
-    <div class="category-item"><a href="phone.php">手機殼</a></div>
-    <div class="category-item"><a href="lipstick.php">口紅</a></div>
-    <div class="category-item"><a href="a-msg.php">新增總類</a></div>
+    <div class="category-list">
+        <?php
+        include("db.php"); // 確保你有連接資料庫
+
+        $sql = "SELECT * FROM `pro_type`";
+        $result = mysqli_query($link, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div class='menu-item'>";
+                echo "<a href='女裝.php?pt_id=" . $row["pt_id"] . "'>" . htmlspecialchars($row["pt_name"]) . "</a>";
+                echo "</div>";
+            }
+        }
+        ?>
+    </div>
 </div>
 
     </style>
@@ -154,7 +181,8 @@
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
                 <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">管理留言板</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">管理商品</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-commodity.php">管理商品</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-type.php">新增種類</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>

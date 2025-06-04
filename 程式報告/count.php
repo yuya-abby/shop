@@ -85,14 +85,14 @@
 
         a {
             text-decoration: none;
-            color: black;
+            font-size: 18px;
+            color:black;
         }
     </style>
 </head>
 <body>
-
 <header>
-    <img src="img/嚕嚕2.png" alt="logo">
+<img src="img\嚕嚕2.png" autoplay muted loop style="width:60%;">
 </header>
 
 <div class="banner">
@@ -148,29 +148,25 @@
                     <th>小計</th>
                 </tr>";
 
-            $total = 0;
-
             while ($row = mysqli_fetch_assoc($res)) {
                 $name_p = $row['addproduct_name'];
                 $count = $row['addproduct_count'];
-                $price = $row['addproduct_money'] / $count;
-                $subtotal = $row['addproduct_money'];
+                $subtotal = $row['addproduct_money']; // 小計（單品總額）
+                $price = $subtotal * $count; // 單價
                 $img = $row['addproduct_img'];
 
                 echo "<tr>
                         <td><img src='$img' width='100'></td>
                         <td>$name_p</td>
                         <td>$count</td>
-                        <td>NT$ $price</td>
                         <td>NT$ $subtotal</td>
+                        <td>NT$ $price</td>
                     </tr>";
 
-                $total += $subtotal;
             }
-
             echo "<tr>
                     <td colspan='4' align='right'><strong>總金額：</strong></td>
-                    <td><strong>NT$ $total</strong></td>
+                    <td><strong>NT$ $price</strong></td>
                 </tr>";
             echo "</table>";
 
@@ -195,6 +191,10 @@
                         <option value="貨到付款">貨到付款</option>
                     </select>
                 </td>
+            </tr>
+            <tr>
+                <td><strong>電話：</strong></td>
+                <td><input type="text" name="phone" required></td>
             </tr>
             <tr>
                 <td><strong>寄送地址：</strong></td>

@@ -73,6 +73,8 @@
         }
         a{
             text-decoration: none;
+            font-size: 18px;
+            color:black;
         }
     </style>
 </head>
@@ -91,48 +93,50 @@
 
 
 <h1 align="center">註冊</h1>
-<form action="add-user2.php" method="get">
-<table align="center"  border="1" cellpadding="4">
-            <tr>
-                <th>欄位</th><th>資料</th>
-            </tr>
-            <tr>
-                <td>帳號:</td>
-                <td><input type="text" name="account"></td>
-                <br>
-            </tr>
-            <tr  >
-                <td>姓名:</td>
-                <td><input type="text" name="name"></td>.
-                <br>
-            </tr>
-            <tr>
-                <td>密碼:</td>
-                <td><input type="password" name="password"></td>
-            </tr>
-            <tr>
-                <td>確認密碼:</td>
-                <td><input type="password" name="password2"></td>
-            </tr>
-            <tr>
-                <td>信箱:</td>
-                <td><input type="text" name="email"></td>
-            </tr>
-            <tr>
-                <td>連絡電話:</td>
-                <td><input type="text" name="phone"></td>
-            </tr>
-        <tr>
+<form action="add-user2.php" method="ger">
+<table align="center" border="1" cellpadding="4">
+    <tr><th>欄位</th><th>資料</th></tr>
+    <tr>
+        <td>帳號:</td>
+        <td><input type="text" name="account" required></td>
+    </tr>
+    <tr>
+        <td>姓名:</td>
+        <td><input type="text" name="name" required></td>
+    </tr>
+    <tr>
+        <td>密碼:</td>
+        <td><input type="password" name="password" required></td>
+    </tr>
+    <tr>
+        <td>確認密碼:</td>
+        <td><input type="password" name="password2" required></td>
+    </tr>
+    <tr>
+        <td>信箱:</td>
+        <td><input type="email" name="email" required></td>
+    </tr>
+    <tr>
+        <td>連絡電話:</td>
+        <td><input type="text" name="phone" required></td>
+    </tr>
+    <tr>
+        <td>使用者身分：</td>
         <td>
-            <input type="submit" value="確定">
-            <input type="submit" value="返回" onclick="location.href='login.php'" >
+            <select name='type' required>
+                <option value='o'>賣家</option>
+                <option value='u' selected>買家</option>
+            </select>
         </td>
     </tr>
-    <br>
-      
-
-        </table>
-        <p style="font-size: 13px;" align="center">如果已經有帳號請按返回</p>
-    </form>
+    <tr>
+        <td colspan="2" align="center">
+            <input type="submit" value="確定">
+            <input type="button" value="返回" onclick="location.href='login.php'">
+        </td>
+    </tr>
+</table>
+<p style="font-size: 13px;" align="center">如果已經有帳號請按返回</p>
+</form>
 </body>
 </html>

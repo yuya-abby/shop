@@ -74,6 +74,8 @@
         }
         a{
             text-decoration: none;
+            font-size: 18px;
+            color:black;
         }
     </style>
 </head>

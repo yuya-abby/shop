@@ -5,112 +5,97 @@
     <title>噜噜咪賣貨便</title>
     <style>
         body {
-            background-color: #fff; 
             font-family: Arial, sans-serif;
+            background: #fff;
+            text-align: center;
             margin: 0;
             padding: 0;
         }
-
         header {
             background-color: rgb(255, 236, 215);
-            text-align: center;
             padding: 15px;
         }
-
         header img {
             height: 200px;
         }
-
         .banner {
             background: rgb(255, 244, 180);
-            text-align: right;
-            padding: 8px;
+            padding: 10px 20px;
             font-size: 15px;
             font-weight: bold;
         }
-
         .navbar table {
             width: 100%;
-        }
-
-        .navbar td {
-            font-size: 20px;
-        }
-
-        h1, h3 {
-            text-align: center;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        .product-section img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .product-section {
-            margin-bottom: 30px;
-        }
-
-        .info-table {
-            margin: 0 auto 20px;
             border-collapse: collapse;
         }
-
-        .info-table td {
-            padding: 8px 15px;
+        .navbar td {
+            padding: 5px 10px;
+            vertical-align: middle;
         }
-
-        .submit-btn {
-            background: #ff6600;
-            color: white;
-            padding: 10px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            border: none;
-            font-size: 16px;
+        .navbar a {
+            text-decoration: none;
+            font-size: 18px;
         }
-
-        input[type="text"] {
+        .navbar input[type="text"] {
+            width: 200px;
+            font-size: 18px;
             padding: 5px;
-            width: 300px;
         }
-
+        .navbar button {
+            width: 100px;
+            font-size: 18px;
+            padding: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+        .message {
+            margin-top: 50px;
+        }
+        .btn {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff6600;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
         a {
             text-decoration: none;
-            color: black;
+            font-size: 18px;
+            color:black;
         }
     </style>
 </head>
 <body>
 
+<?php include "db.php"; ?>
+
 <header>
-    <img src="img/嚕嚕2.png" alt="logo">
+    <img src="img/嚕嚕2.png" style="width:60%;">
 </header>
 
 <div class="banner">
     <div class="navbar">
-        <table cellspacing="0" cellpadding="0">
-            <tr>
-                <td align="center"><a href="index-after.php">首頁</a></td>
-                <td align="center"><a href="msg-after2.php">留言板</a></td>
-                <td align="center"><a href="login.php">登出</a></td>
-            </tr>
-        </table>
+            <table>
+                <tr>
+                    <td style="width:100px; font-size:20px;" align="center"><a href="index-after.php">首頁</a></td>
+                    <td align="right"><input type="text" name="keyword" placeholder="輸入商品名稱搜尋" value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : ''; ?>"  style="width:200px; font-size:18px;"><button type="submit"  style="width:100px; font-size:18px;">搜尋🔍</button></td>
+                    <td style="width:100px; font-size:20px;" align="center"><a href="car.php">購物車</a></td>
+                    <td style="width:100px; font-size:20px;" align="center"><a href="msg-after2.php">留言板</a></td>
+                    <td style="width:100px; font-size:20px;" align="center"><a href="login.php">登出</a></td>
+                </tr>
+            </table>
     </div>
 </div>
 <?php
-include "db.php";
 $account = $_SESSION['account'];
 $payment = $_POST['payment'] ?? '';
 $address = $_POST['address'] ?? '';
+$phone = $_POST['phone'] ?? '';
 $selected_ids = $_POST['selected_items'] ?? [];
 
-if (empty($payment) || empty($address) || empty($selected_ids)) {
+if (empty($payment) || empty($address) || empty($phone) || empty($selected_ids)) {
     echo "資料不完整，請重新填寫。";
     exit;
 }
@@ -141,10 +126,10 @@ while ($row = mysqli_fetch_assoc($res)) {
 $product_str = implode(", ", $product_list);
 
 // 寫入 countmoney2 資料表
-$insert_sql = "INSERT INTO countmoney2 (account, name, payment, address, total, product_list) 
-               VALUES (?, ?, ?, ?, ?, ?)";
+$insert_sql = "INSERT INTO countmoney2 (account, name, payment, address, total, product_list, phone) 
+               VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($link, $insert_sql);
-mysqli_stmt_bind_param($stmt, "ssssis", $account, $name, $payment, $address, $total, $product_str);
+mysqli_stmt_bind_param($stmt, "ssssiss", $account, $name, $payment, $address, $total, $product_str, $phone);
 $success = mysqli_stmt_execute($stmt);
 
 if ($success) {
@@ -153,11 +138,12 @@ if ($success) {
     mysqli_query($link, $delete_sql);
 
     echo "<h3>訂單已成立，感謝您的購買！</h3>";
-    echo "<p><a href='index-after.php'>返回首頁</a></p>";
+    echo "<p><a href='index-after.php' class='btn'>返回首頁</a></p>";
 } else {
     echo "儲存失敗：" . mysqli_error($link);
 }
 ?>
+
 
 </body>
 </html>

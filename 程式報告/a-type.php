@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>噜噜咪賣貨便</title>
-   <style>
+    <style>
         body {
 
         background-color:rgb(255, 255, 255); /* 這是背景 */
@@ -125,20 +125,28 @@
         .menu-toggle {
             z-index: 1100; /* 比側邊選單高就好 */
         }
+        
 
-        .menu-item a {
-            color:rgb(227, 227, 227);
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            text-decoration: none;
 
-        }
 
-        .menu-item a:hover {
-            color:rgb(216, 219, 223);
-            text-decoration: underline;
-        }
+.menu-item a {
+    color:rgb(227, 227, 227);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+
+.menu-item a:hover {
+    color:rgb(216, 219, 223);
+    text-decoration: underline;
+}
+a{
+    text-decoration: none;
+}
+</style>
+
     </style>
 </head>
 <body>
@@ -173,56 +181,48 @@
     </div>
 </div>
 
+
+
     </style>
 </head>
 <body>
-<body>
+
+
+
 <div class="banner"><div class="navbar">
         <table cellspacing="0" cellpadding="0" style="width:100%;">
                 <td align="center" style="width:100px; font-size:20px;"><a href="admin.php">編輯帳號、權限</a></td>
+                <td align="center" style="width:100px; font-size:20px;"><a href="a-msg.php">管理留言板</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="a-commodity.php">管理商品</a></td>
-                <td align="center" style="width:100px; font-size:20px;"><a href="a-type.php">新增種類</a></td>
                 <td align="center" style="width:100px; font-size:20px;"><a href="login.php">登出</a></td>
             </tr>
         </table>
         </div></div>
-
-<h1 align="center">留言板</h1>
-<table align="center" border="1" style="width:1000px">
-        <tr align="center">
-            <td>流水號</td>
-            <td>帳號</td>
-            <td>標題</td>
-            <td>文字</td>
-            <td>圖片</td>
-            <td>上傳時間</td>
-            <td>修改時間</td>
+        
+     <h3 align="center">新增分類</h3>
+<form action="a-type2.php" method="post" enctype="multipart/form-data">
+    <table border="1" style="width:500px; " align="center">
+   
+        <form action="a-type2.php" method="post" enctype="multipart/form-data">
+    <table border="1" style="width:500px ;" style="width:500px ;" align="center">
+   <tr>
+            <td align="center" style="height:50px;">商品種類</td>
+            <td><input type="text" name="pt_name" require></td>
         </tr>
-        <?php
 
-        $sql="SELECT * FROM `msg` WHERE 1";
-        $res=mysqli_query($link,$sql);
-        if(mysqli_num_rows($res)>0){
-            while($row=mysqli_fetch_assoc($res)){
-                
-                    echo "<tr align='center'>";
-                    echo "<td>".$row["id"]."</td>";
-                    echo "<td>".$row["account"]."</td>";
-                    echo "<td>".$row["title"]."</td>";
-                    echo "<td>".$row["text"]."</td>";
-                    echo "<td>".$row["img"]."</td>";
-                    echo "<td>".$row["add_time"]."</td>";
-                    echo "<td>".$row["up_time"]."</td>";
-                    echo"<td><input type='button' value='刪除' onclick=location.href='del4.php?id=".$row["id"]."'></td>";
-                    echo "</tr>";
-                
-                }
-            }
-            
-            
-        ?>
+        
+        <tr align="center">
+        <td colspan="2"> 
+            <input type="submit" value="新增">
+            <input type="reset" value="清除">
+        </td>
+        </tr>
     </table>
-        <script>
+
+</form>
+
+    
+    <script>
 function toggleMenu() {
     document.getElementById('categoryMenu').classList.toggle('active');
 }
